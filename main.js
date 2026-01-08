@@ -1,6 +1,104 @@
 // Main JavaScript file for Aarul Dhawan's Portfolio Website
 // Handles all interactive functionality, animations, and user interactions
 
+// Project modal functionality - defined globally
+const projectDetails = {
+    'arcade-karaoke': {
+        title: 'Arcade Karaoke',
+        description: 'Multiplayer karaoke game with real-time pitch analysis using Librosa. AWS Award Winner at Brown Hackathon 2025.',
+        features: [
+            'Real-time pitch analysis using Librosa',
+            'Multiplayer support with WebSocket connections',
+            'Interactive scoring system',
+            'Song library management',
+            'Live performance feedback'
+        ],
+        technologies: ['Python', 'React', 'WebSockets', 'Librosa', 'Audio Processing'],
+        challenges: 'Implementing real-time audio processing and synchronization across multiple players.',
+        outcome: 'Won AWS Award at Brown Hackathon 2025 for innovative use of cloud services.'
+    },
+    's3-load-gen': {
+        title: 'AWS S3 Express Load Generator',
+        description: 'Re-architected legacy Java load generator into high-performance Rust system, improving throughput by 400%.',
+        features: [
+            'High-performance concurrent request handling',
+            'Comprehensive metrics and monitoring',
+            'Configurable load patterns',
+            'S3 Express One Zone integration',
+            'Performance benchmarking tools'
+        ],
+        technologies: ['Rust', 'AWS S3', 'Tokio', 'Performance Testing', 'Concurrent Programming'],
+        challenges: 'Optimizing for maximum throughput while maintaining accuracy in load testing scenarios.',
+        outcome: 'Achieved 400% improvement in throughput compared to legacy Java implementation.'
+    },
+    'epic-ai': {
+        title: 'Epic AI Assistant',
+        description: 'Cross-platform AI assistant for comparing echocardiogram studies, saving $3.4M+ annually in healthcare costs.',
+        features: [
+            'Cross-platform compatibility (Windows, macOS, Linux)',
+            'AI-powered echocardiogram comparison',
+            'Integration with Epic healthcare systems',
+            'Automated report generation',
+            'Clinical workflow optimization'
+        ],
+        technologies: ['C#', 'Python', 'React', 'AI/ML', 'Healthcare APIs'],
+        challenges: 'Ensuring HIPAA compliance while maintaining high performance in clinical environments.',
+        outcome: 'Estimated to save $3.4M+ annually in labor costs for cardiologists across the U.S. healthcare system.'
+    }
+};
+
+function openProjectModal(projectId) {
+    console.log('Opening modal for:', projectId);
+    const modal = document.getElementById('project-modal');
+    const modalBody = document.getElementById('modal-body');
+    
+    console.log('Modal element:', modal);
+    console.log('Modal body:', modalBody);
+    
+    const project = projectDetails[projectId];
+    if (project) {
+        modalBody.innerHTML = `
+            <h2 class="text-3xl font-bold text-gradient mb-4">${project.title}</h2>
+            <p class="text-gray-300 mb-6">${project.description}</p>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-amber-500 mb-3">Key Features</h3>
+                <ul class="space-y-2">
+                    ${project.features.map(feature => `<li class="flex items-start"><span class="text-amber-500 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
+                </ul>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-amber-500 mb-3">Technologies Used</h3>
+                <div class="flex flex-wrap gap-2">
+                    ${project.technologies.map(tech => `<span class="px-3 py-1 bg-amber-500 bg-opacity-20 text-amber-500 rounded-full text-sm">${tech}</span>`).join('')}
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-amber-500 mb-3">Challenges</h3>
+                <p class="text-gray-300">${project.challenges}</p>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-semibold text-amber-500 mb-3">Outcome</h3>
+                <p class="text-gray-300">${project.outcome}</p>
+            </div>
+        `;
+        
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.log('Project not found:', projectId);
+    }
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById('project-modal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
     initializeNavigation();
@@ -131,9 +229,6 @@ function initializeSkillsChart() {
                 borderColor: 'rgba(212, 165, 116, 0.3)',
                 textStyle: {
                     color: '#f8f8f6'
-                },
-                formatter: function(params) {
-                    return `<strong>${params.data[1]}</strong><br/>Proficiency: ${params.data[0]}%`;
                 }
             },
             legend: {
@@ -517,7 +612,8 @@ window.PortfolioUtils = {
     isValidEmail,
     showNotification,
     downloadResume,
-    filterProjects
+    openProjectModal,
+    closeProjectModal
 };
 
 console.log('Main.js loaded successfully');
