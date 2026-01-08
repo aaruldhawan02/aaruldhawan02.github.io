@@ -271,7 +271,7 @@
                 <div class="reveal">
                     <div class="glass-card rounded-2xl p-8">
                         <h2 class="text-2xl font-bold mb-6 text-gradient">Send Me a Message</h2>
-                        <form id="contact-form" class="space-y-6">
+                        <form id="contact-form" action="https://formspree.io/f/xwvpgwpq" method="POST" class="space-y-6">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div class="floating-label">
                                     <input type="text" id="firstName" name="firstName" class="form-input" placeholder=" " required>
@@ -528,7 +528,12 @@
 
         // Download resume
         function downloadResume() {
-            alert('Resume download functionality would be implemented here.');
+            const link = document.createElement('a');
+            link.href = './resources/Aarul_Dhawan Resume.pdf';
+            link.download = 'Aarul_Dhawan_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         // Reveal animations on scroll

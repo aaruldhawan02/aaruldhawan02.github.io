@@ -403,46 +403,19 @@ function showNotification(message, type = 'info') {
 
 // Resume download functionality
 function downloadResume() {
-    // In a real implementation, this would trigger a download
-    showNotification('Resume download would be triggered here. Contact me directly for my resume.', 'info');
+    const link = document.createElement('a');
+    link.href = './resources/Aarul_Dhawan Resume.pdf';
+    link.download = 'Aarul_Dhawan_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showNotification('Resume downloaded successfully!', 'success');
 }
 
 // Contact form handling (for pages that have it)
 function initializeContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Basic validation
-            if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
-                showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-            
-            if (!isValidEmail(data.email)) {
-                showNotification('Please enter a valid email address.', 'error');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                showNotification('Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-    }
+    // Let Formspree handle the form submission naturally
+    console.log('Contact form initialized - using native Formspree submission');
 }
 
 // Project filtering (for projects page)

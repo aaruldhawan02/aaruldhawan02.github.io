@@ -764,7 +764,12 @@
 
         // Download resume functionality
         function downloadResume() {
-            alert('Resume download functionality would be implemented here.');
+            const link = document.createElement('a');
+            link.href = './resources/Aarul_Dhawan Resume.pdf';
+            link.download = 'Aarul_Dhawan_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
