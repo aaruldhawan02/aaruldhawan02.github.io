@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - Aarul Dhawan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --bg-dark: #0d0d0d;
+            --text-light: #f8f8f6;
+            --accent-amber: #d4a574;
+            --accent-sage: #8fa68e;
+            --neutral-gray: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('./resources/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+        
+        .hero-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            z-index: -1;
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(13, 13, 13, 0.9);
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-sage) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, #c49660 100%);
+            color: var(--bg-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Background -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-gradient">Aarul Dhawan</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="experience.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Experience</a>
+                        <a href="education.html" class="text-white px-3 py-2 text-sm font-medium">Education</a>
+                        <a href="projects.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+                        <a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                        <a href="#" onclick="downloadResume()" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium">Resume</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Home</a>
+                <a href="experience.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Experience</a>
+                <a href="education.html" class="text-white block px-3 py-2 text-base font-medium">Education</a>
+                <a href="projects.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Contact</a>
+                <a href="#" onclick="downloadResume()" class="btn-primary block px-3 py-2 text-base font-medium mx-3 text-center rounded-lg">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-32 pb-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-6 text-gradient">Education</h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                My academic journey in Computer Science and Statistics at the University of Illinois Urbana-Champaign,
+                focusing on distributed systems, machine learning, and software engineering.
+            </p>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Masters Degree -->
+                <div class="glass-card rounded-2xl p-8">
+                    <div class="flex items-start space-x-6 mb-6">
+                        <img src="https://kimi-web-img.moonshot.cn/img/cdn.freelogovectors.net/809787460814887f0266fe3b91a82371ead3dc3b.png" alt="UIUC Logo" class="w-16 h-16 rounded-lg">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-gradient">University of Illinois Urbana-Champaign</h3>
+                            <p class="text-lg text-gray-300 mb-2">Masters in Computer Science</p>
+                            <p class="text-gray-400">Networks and Distributed Systems Concentration</p>
+                            <p class="text-sm text-gray-500">May 2025 – May 2026</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bachelors Degree -->
+                <div class="glass-card rounded-2xl p-8">
+                    <div class="flex items-start space-x-6 mb-6">
+                        <img src="https://kimi-web-img.moonshot.cn/img/cdn.freelogovectors.net/809787460814887f0266fe3b91a82371ead3dc3b.png" alt="UIUC Logo" class="w-16 h-16 rounded-lg">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-gradient">University of Illinois Urbana-Champaign</h3>
+                            <p class="text-lg text-gray-300 mb-2">Bachelors in Computer Science and Statistics (BS)</p>
+                            <p class="text-gray-400">GPA: 3.93 | Highest Distinction</p>
+                            <p class="text-sm text-gray-500">Aug 2022 – May 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coursework -->
+    <section class="pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">Coursework</h2>
+                <p class="text-gray-400">Comprehensive academic foundation in computer science and related fields</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Graduate Courses -->
+                <div class="glass-card rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gradient">Graduate Level</h3>
+                    <div class="grid gap-4">
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS412" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-amber-500 font-bold">412</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Introduction to Data Mining</h4>
+                                <p class="text-gray-400 text-sm">Advanced data analysis and pattern recognition</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS415" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-amber-500 font-bold">415</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Game Development</h4>
+                                <p class="text-gray-400 text-sm">Interactive entertainment systems design</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS425" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-amber-500 font-bold">425</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Distributed Systems</h4>
+                                <p class="text-gray-400 text-sm">Large-scale system architecture and design</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS438" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-amber-500 font-bold">438</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Communication Networks</h4>
+                                <p class="text-gray-400 text-sm">Network protocols and infrastructure</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS441" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-amber-500 font-bold">441</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Applied Machine Learning</h4>
+                                <p class="text-gray-400 text-sm">Practical ML algorithms and applications</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS537" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-amber-500 font-bold">537</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Multimedia Systems</h4>
+                                <p class="text-gray-400 text-sm">Digital media processing and systems</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Undergraduate Courses -->
+                <div class="glass-card rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gradient">Undergraduate Level</h3>
+                    <div class="grid gap-4">
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS128" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">128</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Intro to Computer Science II</h4>
+                                <p class="text-gray-400 text-sm">Object-oriented programming fundamentals</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS222" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">222</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Software Design Lab</h4>
+                                <p class="text-gray-400 text-sm">Software engineering principles and practices</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS225" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">225</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Data Structures</h4>
+                                <p class="text-gray-400 text-sm">Fundamental data organization and algorithms</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS233" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">233</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Computer Architecture</h4>
+                                <p class="text-gray-400 text-sm">Hardware-software interface design</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/cs341" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">341</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">System Programming</h4>
+                                <p class="text-gray-400 text-sm">Low-level programming and system calls</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS374" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">374</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Algorithms & Models of Computation</h4>
+                                <p class="text-gray-400 text-sm">Theoretical computer science foundations</p>
+                            </div>
+                        </a>
+                        
+                        <a href="http://siebelschool.illinois.edu/academics/courses/CS411" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">411</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Database Systems</h4>
+                                <p class="text-gray-400 text-sm">Data management and query optimization</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://siebelschool.illinois.edu/academics/courses/CS444" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
+                            <div class="w-12 h-12 rounded-lg bg-sage-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-sage-500 font-bold">444</span>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium">Deep Learning for Computer Vision</h4>
+                                <p class="text-gray-400 text-sm">Neural networks for image processing</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2025 Aarul Dhawan. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
+                    <a href="mailto:aaruldhawan02@gmail.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Download resume
+        function downloadResume() {
+            alert('Resume download functionality would be implemented here.');
+        }
+    </script>
+</body>
+</html>
