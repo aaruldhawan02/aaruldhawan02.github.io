@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Aarul Dhawan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --bg-dark: #0d0d0d;
+            --text-light: #f8f8f6;
+            --accent-amber: #d4a574;
+            --accent-sage: #8fa68e;
+            --neutral-gray: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('./resources/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+        
+        .hero-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            z-index: -1;
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(13, 13, 13, 0.9);
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-sage) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, #c49660 100%);
+            color: var(--bg-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid rgba(212, 165, 116, 0.2);
+            border-radius: 0.5rem;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-amber);
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-error {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .form-success {
+            color: var(--accent-sage);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid rgba(212, 165, 116, 0.2);
+            border-radius: 0.5rem;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            border-color: var(--accent-amber);
+            color: var(--accent-amber);
+            transform: translateY(-2px);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating-label {
+            position: relative;
+        }
+        
+        .floating-label input,
+        .floating-label textarea {
+            padding-top: 1.5rem;
+        }
+        
+        .floating-label label {
+            position: absolute;
+            left: 1rem;
+            top: 0.75rem;
+            color: var(--neutral-gray);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .floating-label input:focus + label,
+        .floating-label input:not(:placeholder-shown) + label,
+        .floating-label textarea:focus + label,
+        .floating-label textarea:not(:placeholder-shown) + label {
+            top: 0.25rem;
+            font-size: 0.75rem;
+            color: var(--accent-amber);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Background -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-gradient">Aarul Dhawan</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="experience.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Experience</a>
+                        <a href="projects.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+                        <a href="contact.html" class="text-white px-3 py-2 text-sm font-medium">Contact</a>
+                        <a href="#" onclick="downloadResume()" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium">Resume</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Home</a>
+                <a href="experience.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Experience</a>
+                <a href="projects.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="contact.html" class="text-white block px-3 py-2 text-base font-medium">Contact</a>
+                <a href="#" onclick="downloadResume()" class="btn-primary block px-3 py-2 text-base font-medium mx-3 text-center rounded-lg">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-32 pb-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-6 text-gradient">Let's Connect</h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+                I'm currently seeking full-time software engineering opportunities starting May 2026. 
+                Interested in distributed systems, cloud computing, and machine learning roles. 
+                Let's discuss how I can contribute to your team.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Form and Info -->
+    <section class="pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Form -->
+                <div class="reveal">
+                    <div class="glass-card rounded-2xl p-8">
+                        <h2 class="text-2xl font-bold mb-6 text-gradient">Send Me a Message</h2>
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="floating-label">
+                                    <input type="text" id="firstName" name="firstName" class="form-input" placeholder=" " required>
+                                    <label for="firstName">First Name</label>
+                                    <div class="form-error" id="firstName-error">Please enter your first name</div>
+                                </div>
+                                <div class="floating-label">
+                                    <input type="text" id="lastName" name="lastName" class="form-input" placeholder=" " required>
+                                    <label for="lastName">Last Name</label>
+                                    <div class="form-error" id="lastName-error">Please enter your last name</div>
+                                </div>
+                            </div>
+                            
+                            <div class="floating-label">
+                                <input type="email" id="email" name="email" class="form-input" placeholder=" " required>
+                                <label for="email">Email Address</label>
+                                <div class="form-error" id="email-error">Please enter a valid email address</div>
+                            </div>
+                            
+                            <div class="floating-label">
+                                <select id="subject" name="subject" class="form-input form-select" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="job-opportunity">Job Opportunity</option>
+                                    <option value="collaboration">Collaboration</option>
+                                    <option value="consulting">Consulting</option>
+                                    <option value="questions">General Questions</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="form-error" id="subject-error">Please select a subject</div>
+                            </div>
+                            
+                            <div class="floating-label">
+                                <textarea id="message" name="message" class="form-input form-textarea" placeholder=" " required></textarea>
+                                <label for="message">Your Message</label>
+                                <div class="form-error" id="message-error">Please enter your message</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary w-full py-3 rounded-lg font-medium text-lg">
+                                Send Message
+                            </button>
+                            
+                            <div class="form-success" id="form-success">
+                                Thank you for your message! I'll get back to you within 24 hours.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="reveal">
+                    <div class="space-y-6">
+                        <!-- Availability -->
+                        <div class="glass-card rounded-2xl p-6 contact-card">
+                            <h3 class="text-xl font-bold mb-4 text-gradient">Availability</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-300">Available for full-time positions starting May 2026</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-amber-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-300">Open to internship opportunities for Summer 2025</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-300">Available for consulting and freelance projects</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Details -->
+                        <div class="glass-card rounded-2xl p-6 contact-card">
+                            <h3 class="text-xl font-bold mb-4 text-gradient">Contact Information</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-amber-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                    </svg>
+                                    <span class="text-gray-300">aaruldhawan02@gmail.com</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-amber-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-gray-300">Urbana-Champaign, Illinois</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-amber-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-gray-300">Response time: Within 24 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Links -->
+                        <div class="glass-card rounded-2xl p-6 contact-card">
+                            <h3 class="text-xl font-bold mb-4 text-gradient">Connect With Me</h3>
+                            <div class="flex space-x-4">
+                                <a href="https://www.linkedin.com/in/aarul-dhawan/" class="social-link" title="LinkedIn">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://github.com/aaruldhawan02" class="social-link" title="GitHub">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                                <a href="mailto:aaruldhawan02@gmail.com" class="social-link" title="Email">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Preferred Contact Methods -->
+                        <div class="glass-card rounded-2xl p-6 contact-card">
+                            <h3 class="text-xl font-bold mb-4 text-gradient">Best Ways to Reach Me</h3>
+                            <div class="space-y-3 text-sm text-gray-300">
+                                <div class="flex items-center">
+                                    <span class="text-amber-500 font-medium mr-2">1.</span>
+                                    <span>LinkedIn (for professional opportunities)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-amber-500 font-medium mr-2">2.</span>
+                                    <span>Email (for detailed discussions)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-amber-500 font-medium mr-2">3.</span>
+                                    <span>GitHub (for technical collaborations)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2025 Aarul Dhawan. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
+                    <a href="mailto:aaruldhawan02@gmail.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Form validation and submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset previous states
+            clearFormStates();
+            
+            let isValid = true;
+            
+            // Validate fields
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const email = document.getElementById('email');
+            const subject = document.getElementById('subject');
+            const message = document.getElementById('message');
+            
+            if (!firstName.value.trim()) {
+                showFieldError('firstName', 'Please enter your first name');
+                isValid = false;
+            }
+            
+            if (!lastName.value.trim()) {
+                showFieldError('lastName', 'Please enter your last name');
+                isValid = false;
+            }
+            
+            if (!email.value.trim() || !isValidEmail(email.value)) {
+                showFieldError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            if (!subject.value) {
+                showFieldError('subject', 'Please select a subject');
+                isValid = false;
+            }
+            
+            if (!message.value.trim()) {
+                showFieldError('message', 'Please enter your message');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = document.querySelector('button[type="submit"]');
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    document.getElementById('form-success').style.display = 'block';
+                    document.getElementById('contact-form').reset();
+                    submitBtn.textContent = 'Send Message';
+                    submitBtn.disabled = false;
+                    
+                    // Scroll to success message
+                    document.getElementById('form-success').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, 2000);
+            }
+        });
+
+        function showFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(fieldId + '-error');
+            
+            field.style.borderColor = '#ef4444';
+            error.textContent = message;
+            error.style.display = 'block';
+        }
+
+        function clearFormStates() {
+            const inputs = document.querySelectorAll('.form-input');
+            const errors = document.querySelectorAll('.form-error');
+            
+            inputs.forEach(input => {
+                input.style.borderColor = 'rgba(212, 165, 116, 0.2)';
+            });
+            
+            errors.forEach(error => {
+                error.style.display = 'none';
+            });
+            
+            document.getElementById('form-success').style.display = 'none';
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Download resume
+        function downloadResume() {
+            alert('Resume download functionality would be implemented here.');
+        }
+
+        // Reveal animations on scroll
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        
+        // Initialize reveal animations
+        document.addEventListener('DOMContentLoaded', function() {
+            revealOnScroll();
+        });
+
+        // Floating label animations
+        document.querySelectorAll('.floating-label input, .floating-label textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value) {
+                    this.classList.add('has-value');
+                } else {
+                    this.classList.remove('has-value');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

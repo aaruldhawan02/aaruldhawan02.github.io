@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarul Dhawan - Software Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --bg-dark: #0d0d0d;
+            --text-light: #f8f8f6;
+            --accent-amber: #d4a574;
+            --accent-sage: #8fa68e;
+            --neutral-gray: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('./resources/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+        
+        .hero-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            z-index: -1;
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(13, 13, 13, 0.9);
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-sage) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, #c49660 100%);
+            color: var(--bg-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--accent-sage);
+            color: var(--accent-sage);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--accent-sage);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-item {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            color: var(--accent-amber);
+            transform: scale(1.05);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .typing-cursor {
+            color: var(--accent-amber);
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .network-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Background -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-gradient">Aarul Dhawan</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="experience.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Experience</a>
+                        <a href="projects.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+                        <a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                        <a href="#" onclick="downloadResume()" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium">Resume</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Home</a>
+                <a href="experience.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Experience</a>
+                <a href="projects.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Contact</a>
+                <a href="#" onclick="downloadResume()" class="btn-primary block px-3 py-2 text-base font-medium mx-3 text-center rounded-lg">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <div class="mb-8">
+                    <img src="./resources/profile-photo.png" alt="Aarul Dhawan" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-amber-500 shadow-2xl">
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    <span class="text-gradient">Software Engineer</span>
+                </h1>
+                <div class="text-xl md:text-2xl text-gray-300 mb-8 h-16">
+                    <span id="typed-text"></span>
+                </div>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+                    Graduate student at University of Illinois Urbana-Champaign specializing in Networks and Distributed Systems. 
+                    Experienced in cloud architecture, machine learning, and full-stack development with internships at AWS, 
+                    Epic Systems, and other leading tech companies.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="experience.html" class="btn-primary px-8 py-3 rounded-lg font-medium text-lg">View Experience</a>
+                    <a href="projects.html" class="btn-secondary px-8 py-3 rounded-lg font-medium text-lg">Explore Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Visualization -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">Technical Skills</h2>
+                <p class="text-xl text-gray-400">Interactive visualization of my technical expertise</p>
+            </div>
+            <div class="reveal glass-card rounded-2xl p-8">
+                <div id="skills-chart" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">Featured Projects</h2>
+                <p class="text-xl text-gray-400">Highlighting my best work and technical achievements</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Arcade Karaoke -->
+                <div class="reveal project-card glass-card rounded-2xl overflow-hidden" onclick="window.location.href='projects.html#arcade-karaoke'">
+                    <img src="./resources/project-karaoke.png" alt="Arcade Karaoke" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gradient">Arcade Karaoke</h3>
+                        <p class="text-gray-400 mb-4">Multiplayer karaoke game with real-time pitch analysis using Librosa. AWS Award Winner at Brown Hackathon 2025.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-amber-500 bg-opacity-20 text-amber-500 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded-full text-sm">WebSockets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LeMAC -->
+                <div class="reveal project-card glass-card rounded-2xl overflow-hidden" onclick="window.location.href='projects.html#lemac'">
+                    <img src="./resources/project-lemac.png" alt="LeMAC" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gradient">LeMAC</h3>
+                        <p class="text-gray-400 mb-4">Learning Management Assignment Collector that aggregates assignments from Canvas and PrairieLearn into a unified view.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-amber-500 bg-opacity-20 text-amber-500 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-red-500 bg-opacity-20 text-red-400 rounded-full text-sm">Selenium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Epic AI -->
+                <div class="reveal project-card glass-card rounded-2xl overflow-hidden" onclick="window.location.href='projects.html#epic-ai'">
+                    <img src="./resources/project-epic-ai.png" alt="Epic AI Assistant" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gradient">Epic AI Assistant</h3>
+                        <p class="text-gray-400 mb-4">Cross-platform AI assistant for comparing echocardiogram studies, saving $3.4M+ annually in healthcare costs.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-sm">C#</span>
+                            <span class="px-3 py-1 bg-amber-500 bg-opacity-20 text-amber-500 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-sm">React</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="projects.html" class="btn-primary px-8 py-3 rounded-lg font-medium text-lg">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient mb-2">3.93</div>
+                    <div class="text-gray-400">GPA</div>
+                </div>
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient mb-2">5+</div>
+                    <div class="text-gray-400">Internships</div>
+                </div>
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient mb-2">10+</div>
+                    <div class="text-gray-400">Technologies</div>
+                </div>
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-3xl font-bold text-gradient mb-2">$3.4M</div>
+                    <div class="text-gray-400">Cost Savings</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal glass-card rounded-2xl p-12">
+                <h2 class="text-3xl font-bold mb-4 text-gradient">Let's Connect</h2>
+                <p class="text-xl text-gray-400 mb-8">
+                    I'm currently seeking full-time software engineering opportunities starting May 2026. 
+                    Interested in distributed systems, cloud computing, and machine learning roles.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="btn-primary px-8 py-3 rounded-lg font-medium text-lg">Get In Touch</a>
+                    <a href="experience.html" class="btn-secondary px-8 py-3 rounded-lg font-medium text-lg">View My Experience</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2025 Aarul Dhawan. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
+                    <a href="mailto:aaruldhawan02@gmail.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

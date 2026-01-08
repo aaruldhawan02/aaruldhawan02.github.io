@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Aarul Dhawan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --bg-dark: #0d0d0d;
+            --text-light: #f8f8f6;
+            --accent-amber: #d4a574;
+            --accent-sage: #8fa68e;
+            --neutral-gray: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('./resources/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+        
+        .hero-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            z-index: -1;
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(13, 13, 13, 0.9);
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-sage) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, #c49660 100%);
+            color: var(--bg-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            background: rgba(26, 26, 26, 0.8);
+            color: var(--text-light);
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--accent-amber);
+            color: var(--accent-amber);
+        }
+        
+        .filter-btn.active {
+            background: var(--accent-amber);
+            color: var(--bg-dark);
+            border-color: var(--accent-amber);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-card.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            background: rgba(212, 165, 116, 0.1);
+            color: var(--accent-amber);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .search-input {
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid rgba(212, 165, 116, 0.2);
+            color: var(--text-light);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-amber);
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.active {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 2rem;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent-amber);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Background -->
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-gradient">Aarul Dhawan</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="experience.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Experience</a>
+                        <a href="projects.html" class="text-white px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                        <a href="#" onclick="downloadResume()" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium">Resume</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Home</a>
+                <a href="experience.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Experience</a>
+                <a href="projects.html" class="text-white block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Contact</a>
+                <a href="#" onclick="downloadResume()" class="btn-primary block px-3 py-2 text-base font-medium mx-3 text-center rounded-lg">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-32 pb-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-6 text-gradient">Project Portfolio</h1>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+                A collection of my technical projects spanning distributed systems, machine learning, 
+                web development, and cloud computing. Each project showcases different aspects of my expertise.
+            </p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-md mx-auto mb-8">
+                <input type="text" id="search-input" class="search-input" placeholder="Search projects...">
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="react">React</button>
+                <button class="filter-btn" data-filter="rust">Rust</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="aws">AWS</button>
+                <button class="filter-btn" data-filter="hackathon">Hackathon</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Arcade Karaoke -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python react aws hackathon" data-project="arcade-karaoke">
+                    <img src="./resources/project-karaoke.png" alt="Arcade Karaoke" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">Arcade Karaoke</h3>
+                            <span class="px-2 py-1 bg-amber-500 bg-opacity-20 text-amber-500 rounded text-xs font-medium">AWS Award Winner</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Multiplayer karaoke game with real-time scoring based on pitch analysis using Librosa. Built at Brown Hackathon 2025.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">WebSockets</span>
+                            <span class="tech-tag">Librosa</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                            <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LeMAC -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python react web" data-project="lemac">
+                    <img src="./resources/project-lemac.png" alt="LeMAC" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">LeMAC</h3>
+                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-500 rounded text-xs font-medium">Educational</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Learning Management Assignment Collector that aggregates assignments from Canvas and PrairieLearn into a unified view.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Selenium</span>
+                            <span class="tech-tag">API Integration</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                            <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Live Site</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Epic AI Assistant -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python react ml aws" data-project="epic-ai">
+                    <img src="./resources/project-epic-ai.png" alt="Epic AI Assistant" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">Epic AI Assistant</h3>
+                            <span class="px-2 py-1 bg-purple-500 bg-opacity-20 text-purple-500 rounded text-xs font-medium">Healthcare AI</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Cross-platform AI assistant for comparing echocardiogram studies, saving $3.4M+ annually in healthcare costs.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">LLM</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">Case Study</a>
+                            <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AWS S3 Express Load Generator -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="rust java aws" data-project="s3-loadgen">
+                    <img src="https://kimi-web-img.moonshot.cn/img/a0.awsstatic.com/2976694984bcf1c62a18d32c27c94133d12c6635.png" alt="AWS S3 Load Generator" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">S3 Express Load Generator</h3>
+                            <span class="px-2 py-1 bg-orange-500 bg-opacity-20 text-orange-500 rounded text-xs font-medium">High Performance</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Re-architected legacy Java load generator into high-performance Rust system, improving throughput by 400%.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Rust</span>
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">AWS EKS</span>
+                            <span class="tech-tag">CloudWatch</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">Technical Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NLP Graph Generation Tool -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python ml" data-project="nlp-graph">
+                    <img src="https://kimi-web-img.moonshot.cn/img/estuary.dev/9793a668654954736bf893a74098c20864ac1df5.png" alt="NLP Graph Tool" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">NLP Graph Generator</h3>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-500 rounded text-xs font-medium">Research</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">NLP-powered graph generation tool that interprets natural language queries to create data visualizations from SQL databases.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">Data Visualization</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Enhancement ML Pipeline -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python ml aws" data-project="audio-ml">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media.geeksforgeeks.org/a184fd26f5987d1b8d17edef99c90cc6c30951e7.webp" alt="Audio ML Pipeline" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">Audio Enhancement Pipeline</h3>
+                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-500 rounded text-xs font-medium">AMD Client</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">ML pipeline for audio enhancement using dynamic mixing and noise augmentation, increasing model robustness by 2.1x.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AWS SageMaker</span>
+                            <span class="tech-tag">ML/AI</span>
+                            <span class="tech-tag">Audio Processing</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">Technical Report</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Recommendation Engine -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python ml" data-project="doc-rec">
+                    <img src="https://kimi-web-img.moonshot.cn/img/substackcdn.com/9d75ab8402c2cdf088e708c6adc8fe475ee660cb.png" alt="Document Recommendation" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">Document Recommender</h3>
+                            <span class="px-2 py-1 bg-yellow-500 bg-opacity-20 text-yellow-500 rounded text-xs font-medium">TF-IDF</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Document recommendation model using TF-IDF vectorization with Scikit-learn and Pinecone hosted on GCP.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                            <span class="tech-tag">Pinecone</span>
+                            <span class="tech-tag">GCP</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Distributed Systems Simulation -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python rust" data-project="dist-sim">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.eliftech.com/415c671a48a6d014ab6862db1c13e617cc3249ac.webp" alt="Distributed Systems" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">Distributed Systems Sim</h3>
+                            <span class="px-2 py-1 bg-red-500 bg-opacity-20 text-red-500 rounded text-xs font-medium">Academic</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Simulation of distributed consensus algorithms and fault-tolerant systems for academic research and understanding.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Rust</span>
+                            <span class="tech-tag">Networking</span>
+                            <span class="tech-tag">Consensus</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onmo Mobile App -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="mobile react" data-project="onmo">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.freelogovectors.net/809787460814887f0266fe3b91a82371ead3dc3b.png" alt="Onmo Mobile App" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">Onmo Mobile App</h3>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-500 rounded text-xs font-medium">Live on App Store</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Comprehensive iOS application that revolutionizes how users discover, track, and rank their favorite movies and TV shows with social features.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">SwiftUI</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">iOS</span>
+                            <span class="tech-tag">TMDB API</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://apps.apple.com/us/app/onmo/id6756551233" target="_blank" class="text-amber-500 hover:text-amber-400 text-sm font-medium">App Store</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content relative">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div id="modal-body">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2025 Aarul Dhawan. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
+                    <a href="mailto:aaruldhawan02@gmail.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        const searchInput = document.getElementById('search-input');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter projects
+                const filter = btn.dataset.filter;
+                filterProjects(filter, searchInput.value);
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            filterProjects(activeFilter, e.target.value);
+        });
+
+        // Project card click handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectCards = document.querySelectorAll('.project-card');
+            console.log('Found project cards:', projectCards.length);
+            
+            projectCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger modal if clicking on a link
+                    if (e.target.tagName === 'A') {
+                        return;
+                    }
+                    
+                    const projectId = this.dataset.project;
+                    console.log('Clicked project:', projectId);
+                    if (projectId) {
+                        openModal(projectId);
+                    }
+                });
+            });
+        });
+
+
+        function filterProjects(filter, searchTerm) {
+            projectCards.forEach(card => {
+                const tags = card.dataset.tags;
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                const matchesFilter = filter === 'all' || tags.includes(filter);
+                const matchesSearch = searchTerm === '' || 
+                    title.includes(searchTerm.toLowerCase()) || 
+                    description.includes(searchTerm.toLowerCase());
+                
+                if (matchesFilter && matchesSearch) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Modal functionality
+        function openModal(projectId) {
+            const modal = document.getElementById('project-modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            // Project details (in a real implementation, this would be fetched from a data source)
+            const projectDetails = {
+                'arcade-karaoke': {
+                    title: 'Arcade Karaoke - AWS Award Winner',
+                    description: 'A multiplayer karaoke game that provides real-time scoring based on pitch analysis. Built during Brown Hackathon 2025 and won the AWS Award.',
+                    features: [
+                        'Real-time pitch analysis using Librosa',
+                        'Multiplayer functionality with WebSockets',
+                        'Live scoring system',
+                        'Song library management',
+                        'Audio processing and visualization'
+                    ],
+                    technologies: ['Python', 'React', 'WebSockets', 'Librosa', 'AWS'],
+                    challenges: 'Implementing accurate pitch detection in real-time while maintaining low latency for multiplayer gameplay.',
+                    outcome: 'Won AWS Award at Brown Hackathon 2025 for innovative use of cloud technology.'
+                },
+                'lemac': {
+                    title: 'LeMAC - Learning Management Assignment Collector',
+                    description: 'A unified dashboard that aggregates assignments from multiple learning management systems including Canvas and PrairieLearn.',
+                    features: [
+                        'Multi-platform integration',
+                        'Assignment aggregation',
+                        'Deadline tracking',
+                        'Priority management',
+                        'Calendar view'
+                    ],
+                    technologies: ['Python', 'React', 'Selenium', 'API Integration', 'Database Management'],
+                    challenges: 'Handling different API structures and authentication methods across various LMS platforms.',
+                    outcome: 'Successfully unified assignment management for students using multiple learning platforms.'
+                },
+                'epic-ai': {
+                    title: 'Epic AI Assistant - Healthcare Innovation',
+                    description: 'Cross-platform AI assistant for comparing echocardiogram studies, designed to improve diagnostic efficiency in clinical settings.',
+                    features: [
+                        'AI-powered echocardiogram comparison',
+                        'Cross-platform compatibility',
+                        'Clinical workflow integration',
+                        'LLM evaluation metrics',
+                        'Patient data summarization'
+                    ],
+                    technologies: ['C#', 'Python', 'React', 'LLM', 'Healthcare AI'],
+                    challenges: 'Integrating AI models with sensitive healthcare data while maintaining HIPAA compliance and clinical accuracy.',
+                    outcome: 'Estimated to save $3.4M+ annually in labor costs for cardiologists across the U.S. healthcare system.'
+                },
+                's3-loadgen': {
+                    title: 'AWS S3 Express Load Generator',
+                    description: 'High-performance load generator system for AWS S3 Express OneZone, re-architected from legacy Java to Rust for improved throughput.',
+                    features: [
+                        '400% throughput improvement',
+                        'Sub-10ms p99 latency achievement',
+                        'Cross-SDK benchmarking support',
+                        'EKS autoscaling deployment',
+                        'CloudWatch metrics integration'
+                    ],
+                    technologies: ['Rust', 'Java', 'AWS EKS', 'CloudWatch', 'Kubernetes'],
+                    challenges: 'Re-architecting a legacy system while maintaining backward compatibility and achieving significant performance gains.',
+                    outcome: 'Successfully improved throughput by over 400% and achieved consistent sub-10ms p99 latency.'
+                },
+                'onmo': {
+                    title: 'OnMo | Movie & TV Show Ranking App',
+                    description: 'Comprehensive iOS application that revolutionizes how users discover, track, and rank their favorite movies and TV shows with social features and smart algorithms.',
+                    features: [
+                        'Smart Ranking System - Binary comparison algorithm with O(log n) efficiency',
+                        'Social Discovery - Friend networks with shared rankings and viewing calendars',
+                        'Viewing Calendar - Visual timeline of watched content with poster displays',
+                        'Real-time synchronization across devices',
+                        'Custom Memory Efficient Image system with automatic cache cleanup',
+                        'Apple Sign-In and Google OAuth integration'
+                    ],
+                    technologies: ['SwiftUI', 'Firebase', 'Firestore', 'Cloud Functions', 'TMDB API', 'iOS Development'],
+                    challenges: 'Implementing efficient binary comparison ranking algorithm while maintaining smooth UI performance and managing memory optimization for image-heavy content.',
+                    outcome: 'Successfully deployed to Apple App Store with comprehensive social features and optimized performance for movie/TV show discovery and ranking.'
+                },
+                'nlp-graph': {
+                    title: 'NLP Graph Generator',
+                    description: 'NLP-powered graph generation tool that interprets natural language queries to create data visualizations from SQL databases.',
+                    features: [
+                        'Natural language query processing',
+                        'SQL database integration',
+                        'Dynamic graph generation',
+                        'Multiple visualization types',
+                        'Interactive data exploration'
+                    ],
+                    technologies: ['Python', 'NLP', 'SQL', 'Data Visualization', 'Machine Learning'],
+                    challenges: 'Converting natural language queries into accurate SQL statements and appropriate visualization formats.',
+                    outcome: 'Streamlined data exploration for users without SQL knowledge, improving research workflow efficiency.'
+                },
+                'audio-ml': {
+                    title: 'Audio Enhancement ML Pipeline',
+                    description: 'Machine learning pipeline for audio enhancement using dynamic mixing and noise augmentation techniques for AMD Audio Products.',
+                    features: [
+                        'Dynamic mixing algorithms',
+                        'Noise augmentation techniques',
+                        'AWS SageMaker integration',
+                        'Model robustness improvement',
+                        'Pipeline optimization'
+                    ],
+                    technologies: ['Python', 'AWS SageMaker', 'ML/AI', 'Audio Processing', 'Data Pipeline'],
+                    challenges: 'Improving model robustness in noisy environments while maintaining audio quality and reducing training time.',
+                    outcome: 'Increased model robustness by 2.1x in noisy environments and reduced training time by 18%.'
+                },
+                'doc-rec': {
+                    title: 'Document Recommendation Engine',
+                    description: 'Document recommendation model using TF-IDF vectorization for the Federal Acquisition Regulations System.',
+                    features: [
+                        'TF-IDF vectorization',
+                        'Document similarity analysis',
+                        'Scalable recommendation system',
+                        'Federal regulation processing',
+                        'Cloud deployment'
+                    ],
+                    technologies: ['Python', 'Scikit-learn', 'Pinecone', 'GCP', 'TF-IDF'],
+                    challenges: 'Processing large volumes of regulatory documents and providing accurate recommendations at scale.',
+                    outcome: 'Successfully deployed recommendation system for Federal Acquisition Regulations with high accuracy.'
+                },
+                'dist-sim': {
+                    title: 'Distributed Systems Simulation',
+                    description: 'Simulation of distributed consensus algorithms and fault-tolerant systems for academic research and understanding.',
+                    features: [
+                        'Consensus algorithm simulation',
+                        'Fault tolerance testing',
+                        'Network partition handling',
+                        'Performance metrics',
+                        'Educational visualization'
+                    ],
+                    technologies: ['Python', 'Rust', 'Networking', 'Consensus Algorithms', 'System Design'],
+                    challenges: 'Accurately simulating complex distributed system behaviors and failure scenarios.',
+                    outcome: 'Created comprehensive simulation framework for understanding distributed systems concepts.'
+                }
+            };
+            
+            const project = projectDetails[projectId];
+            if (project) {
+                modalBody.innerHTML = `
+                    <h2 class="text-3xl font-bold text-gradient mb-4">${project.title}</h2>
+                    <p class="text-gray-300 mb-6">${project.description}</p>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Key Features</h3>
+                        <ul class="space-y-2">
+                            ${project.features.map(feature => `<li class="flex items-start"><span class="text-amber-500 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Technologies Used</h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Technical Challenges</h3>
+                        <p class="text-gray-300">${project.challenges}</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Outcome & Impact</h3>
+                        <p class="text-gray-300">${project.outcome}</p>
+                    </div>
+                `;
+                
+                modal.classList.add('active');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('project-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Download resume functionality
+        function downloadResume() {
+            alert('Resume download functionality would be implemented here.');
+        }
+    </script>
+</body>
+</html>
+              
