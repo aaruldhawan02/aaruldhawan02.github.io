@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-dark: #1a1a1a;
-            --bg-dark: #0d0d0d;
+            --primary-dark: #0a0a0a;
+            --bg-dark: #050505;
             --text-light: #f8f8f6;
-            --accent-amber: #d4a574;
-            --accent-sage: #8fa68e;
+            --accent-green: #00ff41;
+            --accent-green-dim: #00b341;
             --neutral-gray: #6b7280;
         }
         
@@ -24,8 +24,8 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'JetBrains Mono', 'Inter', monospace;
+            background-color: #050505;
             color: var(--text-light);
             line-height: 1.6;
         }
@@ -36,50 +36,146 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background-image: url('./resources/hero-bg.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #050505;
+            background-image:
+                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -2;
         }
         
         .hero-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
-            z-index: -1;
+            display: none;
         }
         
         .nav-blur {
             backdrop-filter: blur(10px);
-            background: rgba(13, 13, 13, 0.9);
+            background: rgba(3, 5, 3, 0.95);
         }
         
         .glass-card {
-            background: rgba(26, 26, 26, 0.8);
+            background: rgba(5, 10, 5, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 165, 116, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.1);
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-sage) 100%);
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-amber) 0%, #c49660 100%);
+            background: linear-gradient(135deg, var(--accent-green) 0%, #00b341 100%);
             color: var(--bg-dark);
             transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.3);
+        }
+
+        /* Horizontal Timeline */
+        .timeline-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-green-dim), var(--accent-green), var(--accent-green-dim));
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .timeline-node {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18%;
+        }
+
+        .timeline-node:nth-child(even) .timeline-card {
+            order: 3;
+            margin-top: 24px;
+            margin-bottom: 0;
+        }
+        .timeline-node:nth-child(even) .timeline-dot-wrapper {
+            order: 1;
+        }
+        .timeline-node:nth-child(even) .timeline-date {
+            order: 2;
+            margin-bottom: 8px;
+        }
+
+        .timeline-node:nth-child(odd) .timeline-card {
+            order: 1;
+            margin-bottom: 24px;
+        }
+        .timeline-node:nth-child(odd) .timeline-dot-wrapper {
+            order: 3;
+        }
+        .timeline-node:nth-child(odd) .timeline-date {
+            order: 2;
+            margin-top: 8px;
+        }
+
+        .timeline-dot-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 12px rgba(0, 255, 65, 0.6);
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--accent-green-dim);
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
+        .timeline-card {
+            background: rgba(5, 10, 5, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: rgba(0, 255, 65, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .incoming-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 2px 10px;
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            border-radius: 999px;
+            font-size: 0.7rem;
         }
     </style>
 </head>
@@ -138,34 +234,76 @@
         </div>
     </section>
 
-    <!-- Education -->
-    <section class="py-20">
+    <!-- Education Timeline -->
+    <section class="py-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Masters Degree -->
-                <div class="glass-card rounded-2xl p-8">
-                    <div class="flex items-start space-x-6 mb-6">
-                        <img src="./resources/uiuc-logo.png" alt="UIUC Logo" class="w-16 h-16 rounded-lg">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2 text-gradient">University of Illinois Urbana-Champaign</h3>
-                            <p class="text-lg text-gray-300 mb-2">Masters in Computer Science (MCS)</p>
-                            <p class="text-gray-400">Networks and Distributed Systems Concentration</p>
-                            <p class="text-sm text-gray-500">May 2025 – May 2026</p>
-                        </div>
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+
+                <!-- Node 1: Barrington High School -->
+                <div class="timeline-node">
+                    <div class="timeline-card">
+                        <h3 class="text-lg font-bold text-gradient mb-1">Barrington High School</h3>
+                        <p class="text-sm text-gray-300 font-medium mb-1">High School Diploma</p>
+                        <p class="text-xs text-gray-400">Barrington, IL</p>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <span class="timeline-date">Aug 2018 – May 2022</span>
+                </div>
+
+                <!-- Node 2: Penn State -->
+                <div class="timeline-node">
+                    <span class="timeline-date">Aug 2022 – May 2023</span>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <h3 class="text-lg font-bold text-gradient mb-1">Penn State</h3>
+                        <p class="text-sm text-gray-300 font-medium mb-1">BS · Computer Science</p>
+                        <p class="text-xs text-gray-400">Transferred to UIUC</p>
                     </div>
                 </div>
-                
-                <!-- Bachelors Degree -->
-                <div class="glass-card rounded-2xl p-8">
-                    <div class="flex items-start space-x-6 mb-6">
-                        <img src="./resources/uiuc-logo.png" alt="UIUC Logo" class="w-16 h-16 rounded-lg">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2 text-gradient">University of Illinois Urbana-Champaign</h3>
-                            <p class="text-lg text-gray-300 mb-2">Bachelors in Computer Science and Statistics (BS)</p>
-                            <p class="text-gray-400">GPA: 3.93 | Highest Distinction</p>
-                            <p class="text-sm text-gray-500">Aug 2022 – May 2025</p>
-                        </div>
+
+                <!-- Node 3: UIUC BS (card on top) -->
+                <div class="timeline-node">
+                    <div class="timeline-card">
+                        <h3 class="text-lg font-bold text-gradient mb-1">UIUC</h3>
+                        <p class="text-sm text-gray-300 font-medium mb-1">BS · Computer Science & Statistics</p>
+                        <p class="text-xs text-gray-400">GPA: 3.9 · Highest Distinction</p>
                     </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <span class="timeline-date">May 2023 – Aug 2025</span>
+                </div>
+
+                <!-- Node 2: UIUC MCS (middle, card on bottom) -->
+                <div class="timeline-node">
+                    <span class="timeline-date">Aug 2025 – May 2026</span>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <h3 class="text-lg font-bold text-gradient mb-1">UIUC</h3>
+                        <p class="text-sm text-gray-300 font-medium mb-1">MCS · Networks & Distributed Systems</p>
+                        <p class="text-xs text-gray-400">GPA: 3.77</p>
+                    </div>
+                </div>
+
+                <!-- Node 3: JHU (newest, card on top) -->
+                <div class="timeline-node">
+                    <div class="timeline-card">
+                        <h3 class="text-lg font-bold text-gradient mb-1">Johns Hopkins University</h3>
+                        <p class="text-sm text-gray-300 font-medium mb-1">MS · Financial Mathematics</p>
+                        <p class="text-xs text-gray-400">Whiting School of Engineering</p>
+                        <span class="incoming-badge">Incoming Jan 2027</span>
+                    </div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <span class="timeline-date">Jan 2027 – Present</span>
                 </div>
             </div>
         </div>
@@ -185,8 +323,8 @@
                     <h3 class="text-2xl font-bold mb-6 text-gradient">Graduate Level</h3>
                     <div class="grid gap-4">
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS412" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-amber-500 font-bold">412</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-green-400 font-bold">412</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Introduction to Data Mining</h4>
@@ -195,8 +333,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS415" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-amber-500 font-bold">415</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-green-400 font-bold">415</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Game Development</h4>
@@ -205,8 +343,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS425" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-amber-500 font-bold">425</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-green-400 font-bold">425</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Distributed Systems</h4>
@@ -215,8 +353,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS438" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-amber-500 font-bold">438</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-green-400 font-bold">438</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Communication Networks</h4>
@@ -225,8 +363,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS441" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-amber-500 font-bold">441</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-green-400 font-bold">441</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Applied Machine Learning</h4>
@@ -235,8 +373,8 @@
                         </a>
                         
                         <div class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4">
-                                <span class="text-amber-500 font-bold">498</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4">
+                                <span class="text-green-400 font-bold">498</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Cloud Computing Applications</h4>
@@ -245,8 +383,8 @@
                         </div>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS537" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-amber-500 font-bold">537</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-green-400 font-bold">537</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Multimedia Systems</h4>
@@ -255,8 +393,8 @@
                         </a>
                         
                         <div class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4">
-                                <span class="text-amber-500 font-bold">598</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4">
+                                <span class="text-green-400 font-bold">598</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Storage Systems</h4>
@@ -265,8 +403,8 @@
                         </div>
                         
                         <div class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30">
-                            <div class="w-12 h-12 rounded-lg bg-amber-500 bg-opacity-20 flex items-center justify-center mr-4">
-                                <span class="text-amber-500 font-bold">598</span>
+                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4">
+                                <span class="text-green-400 font-bold">598</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Systems For GenAI</h4>
@@ -429,11 +567,11 @@
     <footer class="py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <p class="text-gray-400">© 2025 Aarul Dhawan. All rights reserved.</p>
+                <p class="text-gray-400">© 2026 Aarul Dhawan. All rights reserved.</p>
                 <div class="mt-4 flex justify-center space-x-6">
                     <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
                     <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
-                    <a href="mailto:aaruldhawan02@gmail.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                    <a href="mailto:aaruldhawan@outlook.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
                 </div>
             </div>
         </div>

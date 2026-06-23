@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-dark: #1a1a1a;
-            --bg-dark: #0d0d0d;
+            --primary-dark: #0a0a0a;
+            --bg-dark: #050505;
             --text-light: #f8f8f6;
-            --accent-amber: #d4a574;
-            --accent-sage: #8fa68e;
+            --accent-green: #00ff41;
+            --accent-green-dim: #00b341;
             --neutral-gray: #6b7280;
         }
         
@@ -24,8 +24,8 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'JetBrains Mono', 'Inter', monospace;
+            background-color: #050505;
             color: var(--text-light);
             line-height: 1.6;
         }
@@ -36,50 +36,45 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background-image: url('./resources/hero-bg.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #050505;
+            background-image:
+                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -2;
         }
         
         .hero-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
-            z-index: -1;
+            display: none;
         }
         
         .nav-blur {
             backdrop-filter: blur(10px);
-            background: rgba(13, 13, 13, 0.9);
+            background: rgba(3, 5, 3, 0.95);
         }
         
         .glass-card {
-            background: rgba(26, 26, 26, 0.8);
+            background: rgba(5, 10, 5, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 165, 116, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.1);
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-sage) 100%);
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-amber) 0%, #c49660 100%);
+            background: linear-gradient(135deg, var(--accent-green) 0%, #00b341 100%);
             color: var(--bg-dark);
             transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.3);
         }
         
         .form-group {
@@ -96,8 +91,8 @@
         .form-input {
             width: 100%;
             padding: 0.75rem 1rem;
-            background: rgba(26, 26, 26, 0.8);
-            border: 2px solid rgba(212, 165, 116, 0.2);
+            background: rgba(5, 10, 5, 0.85);
+            border: 2px solid rgba(0, 255, 65, 0.2);
             border-radius: 0.5rem;
             color: var(--text-light);
             transition: all 0.3s ease;
@@ -106,8 +101,8 @@
         
         .form-input:focus {
             outline: none;
-            border-color: var(--accent-amber);
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.1);
         }
         
         .form-select {
@@ -132,7 +127,7 @@
         }
         
         .form-success {
-            color: var(--accent-sage);
+            color: var(--accent-green-dim);
             font-size: 0.875rem;
             margin-top: 0.25rem;
             display: none;
@@ -153,8 +148,8 @@
             justify-content: center;
             width: 3rem;
             height: 3rem;
-            background: rgba(26, 26, 26, 0.8);
-            border: 2px solid rgba(212, 165, 116, 0.2);
+            background: rgba(5, 10, 5, 0.85);
+            border: 2px solid rgba(0, 255, 65, 0.2);
             border-radius: 0.5rem;
             color: var(--text-light);
             transition: all 0.3s ease;
@@ -162,8 +157,8 @@
         }
         
         .social-link:hover {
-            border-color: var(--accent-amber);
-            color: var(--accent-amber);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
             transform: translateY(-2px);
         }
         
@@ -202,7 +197,7 @@
         .floating-label textarea:not(:placeholder-shown) + label {
             top: 0.25rem;
             font-size: 0.75rem;
-            color: var(--accent-amber);
+            color: var(--accent-green);
         }
     </style>
 </head>
@@ -255,9 +250,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-5xl font-bold mb-6 text-gradient">Let's Connect</h1>
             <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
-                I'm currently seeking full-time software engineering opportunities starting May 2026. 
-                Interested in distributed systems, cloud computing, and machine learning roles. 
-                Let's discuss how I can contribute to your team.
+                Feel free to reach out — always happy to connect.
             </p>
         </div>
     </section>
@@ -271,7 +264,7 @@
                 <div class="reveal">
                     <div class="glass-card rounded-2xl p-8">
                         <h2 class="text-2xl font-bold mb-6 text-gradient">Send Me a Message</h2>
-                        <form id="contact-form" action="https://formspree.io/f/xwvpgwpq" method="POST" class="space-y-6">
+                        <form id="contact-form" class="space-y-6">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div class="floating-label">
                                     <input type="text" id="firstName" name="firstName" class="form-input" placeholder=" " required>
@@ -328,12 +321,16 @@
                             <h3 class="text-xl font-bold mb-4 text-gradient">Availability</h3>
                             <div class="space-y-3">
                                 <div class="flex items-center">
-                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                                    <span class="text-gray-300">Available for full-time positions starting May 2026</span>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-300">Incoming SDE @ AWS S3 Express — Aug 2026</span>
                                 </div>
                                 <div class="flex items-center">
                                     <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                                    <span class="text-gray-300">Available for consulting and freelance projects</span>
+                                    <span class="text-gray-300">MS Financial Mathematics @ Johns Hopkins — Jan 2027</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-300">Open to connecting — always happy to chat</span>
                                 </div>
                             </div>
                         </div>
@@ -343,20 +340,20 @@
                             <h3 class="text-xl font-bold mb-4 text-gradient">Contact Information</h3>
                             <div class="space-y-4">
                                 <div class="flex items-center">
-                                    <svg class="w-5 h-5 text-amber-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                                     </svg>
-                                    <span class="text-gray-300">aaruldhawan02@gmail.com</span>
+                                    <span class="text-gray-300">aaruldhawan@outlook.com</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <svg class="w-5 h-5 text-amber-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                                     </svg>
                                     <span class="text-gray-300">Urbana-Champaign, Illinois</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <svg class="w-5 h-5 text-amber-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
                                     </svg>
                                     <span class="text-gray-300">Response time: Within 24 hours</span>
@@ -378,7 +375,7 @@
                                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                     </svg>
                                 </a>
-                                <a href="mailto:aaruldhawan02@gmail.com" class="social-link" title="Email">
+                                <a href="mailto:aaruldhawan@outlook.com" class="social-link" title="Email">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
@@ -392,15 +389,15 @@
                             <h3 class="text-xl font-bold mb-4 text-gradient">Best Ways to Reach Me</h3>
                             <div class="space-y-3 text-sm text-gray-300">
                                 <div class="flex items-center">
-                                    <span class="text-amber-500 font-medium mr-2">1.</span>
+                                    <span class="text-green-400 font-medium mr-2">1.</span>
                                     <span>LinkedIn (for professional opportunities)</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="text-amber-500 font-medium mr-2">2.</span>
+                                    <span class="text-green-400 font-medium mr-2">2.</span>
                                     <span>Email (for detailed discussions)</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="text-amber-500 font-medium mr-2">3.</span>
+                                    <span class="text-green-400 font-medium mr-2">3.</span>
                                     <span>GitHub (for technical collaborations)</span>
                                 </div>
                             </div>
@@ -415,11 +412,11 @@
     <footer class="py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <p class="text-gray-400">© 2025 Aarul Dhawan. All rights reserved.</p>
+                <p class="text-gray-400">© 2026 Aarul Dhawan. All rights reserved.</p>
                 <div class="mt-4 flex justify-center space-x-6">
                     <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
                     <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
-                    <a href="mailto:aaruldhawan02@gmail.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                    <a href="mailto:aaruldhawan@outlook.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
                 </div>
             </div>
         </div>
@@ -473,23 +470,40 @@
             }
             
             if (isValid) {
-                // Simulate form submission
                 const submitBtn = document.querySelector('button[type="submit"]');
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    document.getElementById('form-success').style.display = 'block';
-                    document.getElementById('contact-form').reset();
+
+                const formData = {
+                    access_key: 'ae86c324-2482-4123-b0f9-67f695857d09',
+                    name: firstName.value.trim() + ' ' + lastName.value.trim(),
+                    email: email.value.trim(),
+                    subject: subject.value,
+                    message: message.value.trim()
+                };
+
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('form-success').style.display = 'block';
+                        document.getElementById('contact-form').reset();
+                        document.getElementById('form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        alert('Something went wrong. Please try emailing me directly.');
+                    }
+                })
+                .catch(() => {
+                    alert('Something went wrong. Please try emailing me directly.');
+                })
+                .finally(() => {
                     submitBtn.textContent = 'Send Message';
                     submitBtn.disabled = false;
-                    
-                    // Scroll to success message
-                    document.getElementById('form-success').scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center' 
-                    });
-                }, 2000);
+                });
             }
         });
 
@@ -507,7 +521,7 @@
             const errors = document.querySelectorAll('.form-error');
             
             inputs.forEach(input => {
-                input.style.borderColor = 'rgba(212, 165, 116, 0.2)';
+                input.style.borderColor = 'rgba(0, 255, 65, 0.2)';
             });
             
             errors.forEach(error => {

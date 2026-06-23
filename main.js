@@ -3,47 +3,57 @@
 
 // Project modal functionality - defined globally
 const projectDetails = {
+    'shard': {
+        title: 'CS598 (Storage Systems): RDMA Distributed KV Store',
+        description: 'Distributed key-value store using one-sided RDMA over RoCE, targeting sub-millisecond latencies as an alternative to AWS S3 Express.',
+        features: [
+            'One-sided RDMA over RoCE for sub-millisecond read/write latency',
+            'Reed-Solomon erasure coding for fault-tolerant durability',
+            'Tiered RDMA/NVMe storage for hot and cold data',
+            'SWIM-inspired failure detection for distributed coordination'
+        ],
+        technologies: ['C', 'RDMA/RoCE', 'NVMe', 'Erasure Coding'],
+        challenges: 'Implementing one-sided RDMA operations correctly while integrating Reed-Solomon coding and SWIM failure detection without introducing latency overhead.',
+        outcome: 'Achieved sub-millisecond latency targets for distributed KV store operations, competitive with S3 Express.'
+    },
+    'sackv': {
+        title: 'CS598 (GenAI Systems): Chunk-Level KV Cache Eviction',
+        description: 'Fork of vLLM v0.18.0 that adds semantic chunk-level KV cache eviction for RAG workloads, reducing memory pressure while preserving relevant context.',
+        features: [
+            'Chunk-level KV cache eviction integrated into the vLLM scheduler',
+            'Eviction scores combining retrieval relevance, attention signal, and recency',
+            'Weights learned offline via logistic regression on MuSiQue multi-hop QA dataset',
+            'Drop-in replacement for vLLM\'s default caching policy'
+        ],
+        technologies: ['Python', 'vLLM', 'PyTorch', 'RAG', 'LLM Systems'],
+        challenges: 'Hooking into vLLM\'s scheduler internals to apply eviction at chunk granularity without breaking existing inference correctness.',
+        outcome: 'Demonstrated improved cache efficiency for multi-hop RAG workloads compared to vLLM\'s default eviction policy.'
+    },
+    'payoff': {
+        title: 'PayOff — Offline Peer-to-Peer Payments',
+        description: 'Peer-to-peer payment system that works with no WiFi or cellular connection, using Apple Bonjour for device discovery and CryptoKit for transaction security.',
+        features: [
+            'Device discovery via Apple Bonjour — no internet required',
+            'ECDH handshake via Apple CryptoKit for cryptographic security',
+            'Transactions queue and execute automatically on reconnect',
+            'AWS backend for settlement when connectivity is restored'
+        ],
+        technologies: ['Swift', 'AWS', 'Apple CryptoKit', 'Bonjour', 'ECDH'],
+        challenges: 'Ensuring transaction integrity and preventing double-spend in a fully offline mesh network with no central authority.',
+        outcome: 'Built end-to-end at Hack@Brown 2026, demonstrating fully functional offline payments between devices.'
+    },
     'arcade-karaoke': {
-        title: 'Arcade Karaoke',
-        description: 'Multiplayer karaoke game with real-time pitch analysis using Librosa. AWS Award Winner at Brown Hackathon 2025.',
+        title: 'Arcade Karaoke — AWS Award Winner',
+        description: 'Multiplayer karaoke game with real-time pitch analysis using Librosa. AWS Award Winner at Hack@Brown 2025.',
         features: [
-            'Real-time pitch analysis using Librosa',
-            'Multiplayer support with WebSocket connections',
-            'Interactive scoring system',
-            'Song library management',
-            'Live performance feedback'
+            'Real-time pitch detection using Librosa PYIN',
+            'Dynamic Time Warping to score vocals against reference contours',
+            'Multiplayer via WebSocket session coordination',
+            'Host/player architecture with live leaderboard'
         ],
-        technologies: ['Python', 'React', 'WebSockets', 'Librosa', 'Audio Processing'],
-        challenges: 'Implementing real-time audio processing and synchronization across multiple players.',
-        outcome: 'Won AWS Award at Brown Hackathon 2025 for innovative use of cloud services.'
-    },
-    's3-load-gen': {
-        title: 'AWS S3 Express Load Generator',
-        description: 'Re-architected legacy Java load generator into high-performance Rust system, improving throughput by 400%.',
-        features: [
-            'High-performance concurrent request handling',
-            'Comprehensive metrics and monitoring',
-            'Configurable load patterns',
-            'S3 Express One Zone integration',
-            'Performance benchmarking tools'
-        ],
-        technologies: ['Rust', 'AWS S3', 'Tokio', 'Performance Testing', 'Concurrent Programming'],
-        challenges: 'Optimizing for maximum throughput while maintaining accuracy in load testing scenarios.',
-        outcome: 'Achieved 400% improvement in throughput compared to legacy Java implementation.'
-    },
-    'epic-ai': {
-        title: 'Epic AI Assistant',
-        description: 'Cross-platform AI assistant for comparing echocardiogram studies, saving $3.4M+ annually in healthcare costs.',
-        features: [
-            'Cross-platform compatibility (Windows, macOS, Linux)',
-            'AI-powered echocardiogram comparison',
-            'Integration with Epic healthcare systems',
-            'Automated report generation',
-            'Clinical workflow optimization'
-        ],
-        technologies: ['C#', 'Python', 'React', 'AI/ML', 'Healthcare APIs'],
-        challenges: 'Ensuring HIPAA compliance while maintaining high performance in clinical environments.',
-        outcome: 'Estimated to save $3.4M+ annually in labor costs for cardiologists across the U.S. healthcare system.'
+        technologies: ['Python', 'React', 'Node.js', 'WebSockets', 'Librosa'],
+        challenges: 'Implementing accurate pitch detection in real-time while maintaining low latency for multiplayer gameplay.',
+        outcome: 'Won AWS Award at Hack@Brown 2025 for innovative use of cloud technology.'
     }
 };
 
@@ -103,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
     initializeNavigation();
     initializeAnimations();
-    initializeSkillsChart();
     initializeTypewriter();
     initializeScrollEffects();
     
@@ -174,11 +183,11 @@ function initializeTypewriter() {
     if (typedElement && typeof Typed !== 'undefined') {
         new Typed('#typed-text', {
             strings: [
-                'Specialized in Distributed Systems',
-                'Cloud Architecture Expert',
-                'Machine Learning Enthusiast',
-                'Full-Stack Developer',
-                'Masters Student at UIUC'
+                '> distributed systems engineer',
+                '> incoming SDE @ AWS S3',
+                '> sub-millisecond latency enjoyer',
+                '> building on RDMA + RoCE',
+                '> MCS @ UIUC · MS FinMath @ JHU'
             ],
             typeSpeed: 50,
             backSpeed: 30,

@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-dark: #1a1a1a;
-            --bg-dark: #0d0d0d;
+            --primary-dark: #0a0a0a;
+            --bg-dark: #050505;
             --text-light: #f8f8f6;
-            --accent-amber: #d4a574;
-            --accent-sage: #8fa68e;
+            --accent-green: #00ff41;
+            --accent-green-dim: #00b341;
             --neutral-gray: #6b7280;
         }
         
@@ -24,8 +24,8 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'JetBrains Mono', 'Inter', monospace;
+            background-color: #050505;
             color: var(--text-light);
             line-height: 1.6;
         }
@@ -36,56 +36,51 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background-image: url('./resources/hero-bg.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #050505;
+            background-image:
+                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -2;
         }
         
         .hero-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
-            z-index: -1;
+            display: none;
         }
         
         .nav-blur {
             backdrop-filter: blur(10px);
-            background: rgba(13, 13, 13, 0.9);
+            background: rgba(3, 5, 3, 0.95);
         }
         
         .glass-card {
-            background: rgba(26, 26, 26, 0.8);
+            background: rgba(5, 10, 5, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 165, 116, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.1);
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-sage) 100%);
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-amber) 0%, #c49660 100%);
+            background: linear-gradient(135deg, var(--accent-green) 0%, #00b341 100%);
             color: var(--bg-dark);
             transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 165, 116, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.3);
         }
         
         .filter-btn {
             padding: 0.5rem 1rem;
             border: 2px solid transparent;
-            background: rgba(26, 26, 26, 0.8);
+            background: rgba(5, 10, 5, 0.85);
             color: var(--text-light);
             border-radius: 0.5rem;
             transition: all 0.3s ease;
@@ -93,14 +88,14 @@
         }
         
         .filter-btn:hover {
-            border-color: var(--accent-amber);
-            color: var(--accent-amber);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
         }
         
         .filter-btn.active {
-            background: var(--accent-amber);
+            background: var(--accent-green);
             color: var(--bg-dark);
-            border-color: var(--accent-amber);
+            border-color: var(--accent-green);
         }
         
         .project-card {
@@ -125,16 +120,16 @@
             display: inline-block;
             padding: 0.25rem 0.75rem;
             margin: 0.25rem 0.25rem 0.25rem 0;
-            background: rgba(212, 165, 116, 0.1);
-            color: var(--accent-amber);
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--accent-green);
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
         }
         
         .search-input {
-            background: rgba(26, 26, 26, 0.8);
-            border: 2px solid rgba(212, 165, 116, 0.2);
+            background: rgba(5, 10, 5, 0.85);
+            border: 2px solid rgba(0, 255, 65, 0.2);
             color: var(--text-light);
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
@@ -144,8 +139,8 @@
         
         .search-input:focus {
             outline: none;
-            border-color: var(--accent-amber);
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.1);
         }
         
         .modal {
@@ -167,8 +162,8 @@
         }
         
         .modal-content {
-            background: rgba(26, 26, 26, 0.95);
-            border: 1px solid rgba(212, 165, 116, 0.2);
+            background: rgba(5, 10, 5, 0.95);
+            border: 1px solid rgba(0, 255, 65, 0.2);
             border-radius: 1rem;
             padding: 2rem;
             max-width: 800px;
@@ -190,7 +185,7 @@
         }
         
         .close-modal:hover {
-            color: var(--accent-amber);
+            color: var(--accent-green);
         }
         
         .reveal {
@@ -266,6 +261,7 @@
             <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="systems">Systems</button>
                 <button class="filter-btn" data-filter="python">Python</button>
                 <button class="filter-btn" data-filter="react">React</button>
                 <button class="filter-btn" data-filter="rust">Rust</button>
@@ -282,13 +278,104 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
+                <!-- SHARD -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="systems" data-project="shard">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+                        <span class="text-4xl font-bold text-gradient">SHARD</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">CS598 (Storage Systems)</h3>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded text-xs font-medium">RDMA/RoCE</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Distributed KV store using one-sided RDMA over RoCE targeting sub-millisecond latencies. Reed-Solomon erasure coding and SWIM failure detection.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">C</span>
+                            <span class="tech-tag">RDMA/RoCE</span>
+                            <span class="tech-tag">Erasure Coding</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/aaruldhawan02/RDMA-Distributed-KV-Store" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SACKV -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="systems python ml" data-project="sackv">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);">
+                        <span class="text-4xl font-bold text-gradient">SACKV</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">CS598 (GenAI Systems)</h3>
+                            <span class="px-2 py-1 bg-purple-500 bg-opacity-20 text-purple-400 rounded text-xs font-medium">vLLM Fork</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Fork of vLLM v0.18.0 adding chunk-level KV cache eviction for RAG workloads. Eviction scores combine retrieval relevance, attention signal, and recency.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">vLLM</span>
+                            <span class="tech-tag">PyTorch</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/ktrikha2/sackv" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CS 537 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python ml systems" data-project="cs537">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1a0a 0%, #0a2a1a 100%);">
+                        <span class="text-4xl font-bold text-gradient">CS 537</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">CS537 (Multimedia Systems)</h3>
+                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded text-xs font-medium">Research</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Compared five feature-level transmission strategies for server-side keyword spotting using PyTorch CNNs and Silero VAD — from raw PCM to learned CNN embeddings.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Silero VAD</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/abhishekramakri/CS-537-Research" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PayOff -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="hackathon aws" data-project="payoff">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d1a 100%);">
+                        <span class="text-4xl font-bold text-gradient">PayOff</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">PayOff</h3>
+                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded text-xs font-medium">Hack@Brown 2026</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Peer-to-peer offline payment system using Apple Bonjour — no WiFi or cellular required. ECDH handshake via Apple CryptoKit.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Swift</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">CryptoKit</span>
+                            <span class="tech-tag">Bonjour</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/PillaiFanClub/Ladidadidaaaa" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Arcade Karaoke -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python react aws hackathon" data-project="arcade-karaoke">
-                    <img src="./resources/project-karaoke.png" alt="Arcade Karaoke" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1a0a 0%, #1a2a0a 100%);">
+                        <span class="text-4xl font-bold text-gradient">Karaoke</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">Arcade Karaoke</h3>
-                            <span class="px-2 py-1 bg-amber-500 bg-opacity-20 text-amber-500 rounded text-xs font-medium">AWS Award Winner</span>
+                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded text-xs font-medium">AWS Award Winner</span>
                         </div>
                         <p class="text-gray-400 mb-4">Multiplayer karaoke game with real-time scoring based on pitch analysis using Librosa. Built at Brown Hackathon 2025.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -298,7 +385,7 @@
                             <span class="tech-tag">Librosa</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
                             <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Demo</a>
                         </div>
                     </div>
@@ -306,7 +393,9 @@
 
                 <!-- LeMAC -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python react web" data-project="lemac">
-                    <img src="./resources/project-lemac.png" alt="LeMAC" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1a15 0%, #0a2a1a 100%);">
+                        <span class="text-4xl font-bold text-gradient">LeMAC</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">LeMAC</h3>
@@ -320,7 +409,7 @@
                             <span class="tech-tag">API Integration</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
                             <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Live Site</a>
                         </div>
                     </div>
@@ -328,7 +417,9 @@
 
                 <!-- Epic AI Assistant -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python react ml aws" data-project="epic-ai">
-                    <img src="./resources/project-epic-ai.png" alt="Epic AI Assistant" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 100%);">
+                        <span class="text-4xl font-bold text-gradient">Epic AI</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">Epic AI Assistant</h3>
@@ -342,7 +433,7 @@
                             <span class="tech-tag">LLM</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">Case Study</a>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">Case Study</a>
                             <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Details</a>
                         </div>
                     </div>
@@ -350,7 +441,9 @@
 
                 <!-- AWS S3 Express Load Generator -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="rust java aws" data-project="s3-loadgen">
-                    <img src="./resources/aws-logo.png" alt="AWS S3 Load Generator" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #0a1500 0%, #1a2a00 100%);">
+                        <span class="text-4xl font-bold text-gradient">S3 LoadGen</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">S3 Express Load Generator</h3>
@@ -364,14 +457,16 @@
                             <span class="tech-tag">CloudWatch</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">Technical Details</a>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">Technical Details</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- NLP Graph Generation Tool -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python ml" data-project="nlp-graph">
-                    <img src="./resources/epivara" alt="NLP Graph Tool" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #001a1a 0%, #002a2a 100%);">
+                        <span class="text-4xl font-bold text-gradient">NLP Graph</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">NLP Graph Generator</h3>
@@ -385,14 +480,16 @@
                             <span class="tech-tag">Data Visualization</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Audio Enhancement ML Pipeline -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python ml aws" data-project="audio-ml">
-                    <img src="./resources/amd.jpeg" alt="Audio ML Pipeline" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #0a0a00 0%, #1a1a00 100%);">
+                        <span class="text-4xl font-bold text-gradient">Audio ML</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">Audio Enhancement Pipeline</h3>
@@ -406,14 +503,16 @@
                             <span class="tech-tag">Audio Processing</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">Technical Report</a>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">Technical Report</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Document Recommendation Engine -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="python ml" data-project="doc-rec">
-                    <img src="./resources/techsur_logo.jpeg" alt="Document Recommendation" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #001500 0%, #002000 100%);">
+                        <span class="text-4xl font-bold text-gradient">DocRec</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">Document Recommender</h3>
@@ -427,14 +526,16 @@
                             <span class="tech-tag">GCP</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="#" class="text-amber-500 hover:text-amber-400 text-sm font-medium">GitHub</a>
+                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Onmo Mobile App -->
                 <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="mobile react" data-project="onmo">
-                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.freelogovectors.net/809787460814887f0266fe3b91a82371ead3dc3b.png" alt="Onmo Mobile App" class="w-full h-48 object-cover">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #001a0a 0%, #002a15 100%);">
+                        <span class="text-4xl font-bold text-gradient">OnMo</span>
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">Onmo Mobile App</h3>
@@ -448,7 +549,7 @@
                             <span class="tech-tag">TMDB API</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="https://apps.apple.com/us/app/onmo/id6756551233" target="_blank" class="text-amber-500 hover:text-amber-400 text-sm font-medium">App Store</a>
+                            <a href="https://apps.apple.com/us/app/onmo/id6756551233" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">App Store</a>
                         </div>
                     </div>
                 </div>
@@ -471,11 +572,11 @@
     <footer class="py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <p class="text-gray-400">© 2025 Aarul Dhawan. All rights reserved.</p>
+                <p class="text-gray-400">© 2026 Aarul Dhawan. All rights reserved.</p>
                 <div class="mt-4 flex justify-center space-x-6">
                     <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
                     <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
-                    <a href="mailto:aaruldhawan02@gmail.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                    <a href="mailto:aaruldhawan@outlook.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
                 </div>
             </div>
         </div>
@@ -558,6 +659,59 @@
             
             // Project details (in a real implementation, this would be fetched from a data source)
             const projectDetails = {
+                'shard': {
+                    title: 'CS598 (Storage Systems): RDMA Distributed Key-Value Store',
+                    description: 'Distributed key-value store using one-sided RDMA over RoCE, targeting sub-millisecond latencies as an alternative to AWS S3 Express.',
+                    features: [
+                        'One-sided RDMA over RoCE for sub-millisecond read/write latency',
+                        'Reed-Solomon erasure coding for fault-tolerant durability',
+                        'Tiered RDMA/NVMe storage for hot and cold data',
+                        'SWIM-inspired failure detection for distributed coordination'
+                    ],
+                    technologies: ['C', 'RDMA/RoCE', 'NVMe', 'Erasure Coding'],
+                    challenges: 'Implementing one-sided RDMA operations correctly while integrating Reed-Solomon coding and SWIM failure detection without introducing latency overhead.',
+                    outcome: 'Achieved sub-millisecond latency targets for distributed KV store operations, competitive with S3 Express.'
+                },
+                'sackv': {
+                    title: 'CS598 (GenAI Systems): Chunk-Level KV Cache Eviction',
+                    description: 'Fork of vLLM v0.18.0 that adds semantic chunk-level KV cache eviction for RAG workloads, reducing memory pressure while preserving relevant context.',
+                    features: [
+                        'Chunk-level KV cache eviction integrated into the vLLM scheduler',
+                        'Eviction scores combining retrieval relevance, attention signal, and recency',
+                        'Weights learned offline via logistic regression on MuSiQue multi-hop QA dataset',
+                        'Drop-in replacement for vLLM\'s default caching policy'
+                    ],
+                    technologies: ['Python', 'vLLM', 'PyTorch', 'RAG', 'LLM Systems'],
+                    challenges: 'Hooking into vLLM\'s scheduler internals to apply eviction at chunk granularity without breaking existing inference correctness.',
+                    outcome: 'Demonstrated improved cache efficiency for multi-hop RAG workloads compared to vLLM\'s default eviction policy.'
+                },
+                'cs537': {
+                    title: 'CS537 (Multimedia Systems): Bandwidth-Efficient Keyword Spotting',
+                    description: 'Research project comparing five feature-level transmission strategies for server-side keyword spotting over a client-server socket architecture.',
+                    features: [
+                        'Five strategies: raw PCM → MFCC → VAD-filtered → downsampled → learned CNN embeddings',
+                        'Silero VAD for event-triggered transmission — skips silence entirely',
+                        'PyTorch CNN trained on Google Speech Commands v2 (84K samples, 35 classes)',
+                        'A5 strategy: encoder runs on device, only 64–512 bytes transmitted per utterance',
+                        'Evaluated accuracy vs. bandwidth tradeoffs across all approaches'
+                    ],
+                    technologies: ['Python', 'PyTorch', 'Silero VAD', 'CNN', 'Socket Programming'],
+                    challenges: 'Designing a split-inference architecture where the CNN encoder runs on the client device and only the lightweight embedding is sent to the server for classification.',
+                    outcome: 'Learned CNN embeddings (A5) achieved the best accuracy-per-byte ratio, transmitting 64–512 bytes vs. 32KB for raw PCM with minimal accuracy loss.'
+                },
+                'payoff': {
+                    title: 'PayOff — Offline Peer-to-Peer Payments',
+                    description: 'Peer-to-peer payment system that works with no WiFi or cellular connection, using Apple Bonjour for device discovery and CryptoKit for transaction security.',
+                    features: [
+                        'Device discovery via Apple Bonjour — no internet required',
+                        'ECDH handshake via Apple CryptoKit for cryptographic security',
+                        'Transactions queue and execute automatically on reconnect',
+                        'AWS backend for settlement when connectivity is restored'
+                    ],
+                    technologies: ['Swift', 'AWS', 'Apple CryptoKit', 'Bonjour', 'ECDH'],
+                    challenges: 'Ensuring transaction integrity and preventing double-spend in a fully offline mesh network with no central authority.',
+                    outcome: 'Built end-to-end at Hack@Brown 2026, demonstrating fully functional offline payments between devices.'
+                },
                 'arcade-karaoke': {
                     title: 'Arcade Karaoke - AWS Award Winner',
                     description: 'A multiplayer karaoke game that provides real-time scoring based on pitch analysis. Built during Brown Hackathon 2025 and won the AWS Award.',
@@ -680,26 +834,26 @@
                     <p class="text-gray-300 mb-6">${project.description}</p>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Key Features</h3>
+                        <h3 class="text-xl font-semibold text-green-400 mb-3">Key Features</h3>
                         <ul class="space-y-2">
-                            ${project.features.map(feature => `<li class="flex items-start"><span class="text-amber-500 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
+                            ${project.features.map(feature => `<li class="flex items-start"><span class="text-green-400 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
                         </ul>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Technologies Used</h3>
+                        <h3 class="text-xl font-semibold text-green-400 mb-3">Technologies Used</h3>
                         <div class="flex flex-wrap gap-2">
                             ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
                         </div>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Technical Challenges</h3>
+                        <h3 class="text-xl font-semibold text-green-400 mb-3">Technical Challenges</h3>
                         <p class="text-gray-300">${project.challenges}</p>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-amber-500 mb-3">Outcome & Impact</h3>
+                        <h3 class="text-xl font-semibold text-green-400 mb-3">Outcome & Impact</h3>
                         <p class="text-gray-300">${project.outcome}</p>
                     </div>
                 `;
