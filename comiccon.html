@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Cons - Aarul Dhawan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a0a0a;
+            --bg-dark: #050505;
+            --text-light: #f8f8f6;
+            --accent-green: #00ff41;
+            --accent-green-dim: #00b341;
+            --neutral-gray: #6b7280;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'JetBrains Mono', 'Inter', monospace;
+            background-color: #050505;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .hero-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background-color: #050505;
+            background-image:
+                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(3, 5, 3, 0.95);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #00b341 100%);
+            color: var(--bg-dark);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.3);
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            background: rgba(5, 10, 5, 0.85);
+            cursor: pointer;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-card:hover {
+            border-color: rgba(0, 255, 65, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.12);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .photo-label {
+            padding: 10px 14px 4px;
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .photo-role {
+            padding: 0 14px 12px;
+            font-size: 0.7rem;
+            color: #6b7280;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 24px;
+            font-size: 2rem;
+            color: var(--accent-green);
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+        }
+
+        .lightbox-label {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-green);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-bold text-gradient">Aarul Dhawan</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="experience.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Experience</a>
+                        <a href="education.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Education</a>
+                        <a href="projects.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+                        <a href="comiccon.html" class="text-white px-3 py-2 text-sm font-medium">Comic Cons</a>
+                        <a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                        <a href="#" onclick="downloadResume()" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium">Resume</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Home</a>
+                <a href="experience.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Experience</a>
+                <a href="education.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Education</a>
+                <a href="projects.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="comiccon.html" class="text-white block px-3 py-2 text-base font-medium">Comic Cons</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium">Contact</a>
+                <a href="#" onclick="downloadResume()" class="btn-primary block px-3 py-2 text-base font-medium mx-3 text-center rounded-lg">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-32 pb-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-6 text-gradient">Comic Cons</h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                One of my favorite things to do is attend comic cons — exploring the booths, meeting creators,
+                and getting to meet some of the actors and artists behind characters I grew up with.
+                Here are some of the celebrities I've had the chance to meet.
+            </p>
+        </div>
+    </section>
+
+    <!-- Photo Grid -->
+    <section class="pb-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Washington Summer Con -->
+            <div class="mb-14">
+                <div class="flex items-center gap-4 mb-6">
+                    <h2 class="text-2xl font-bold text-gradient whitespace-nowrap">Washington Summer Con</h2>
+                    <div class="flex-1 h-px bg-gradient-to-r from-green-500 to-transparent opacity-30"></div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/CharlieCox_JohnBernthal1.jpg', 'Charlie Cox & Jon Bernthal')">
+                        <img loading="lazy" src="./Comic Con Photos/web/CharlieCox_JohnBernthal1.jpg" alt="Charlie Cox & Jon Bernthal">
+                        <div class="photo-label">Charlie Cox & Jon Bernthal</div>
+                        <div class="photo-role">Daredevil · The Punisher</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/CharlieCox_JohnBernthal2.jpg', 'Charlie Cox & Jon Bernthal')">
+                        <img loading="lazy" src="./Comic Con Photos/web/CharlieCox_JohnBernthal2.jpg" alt="Charlie Cox & Jon Bernthal">
+                        <div class="photo-label">Charlie Cox & Jon Bernthal</div>
+                        <div class="photo-role">Daredevil · The Punisher</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Vincent_DOnofrio.jpg', 'Vincent D\'Onofrio')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Vincent_DOnofrio.jpg" alt="Vincent D'Onofrio">
+                        <div class="photo-label">Vincent D'Onofrio</div>
+                        <div class="photo-role">Kingpin · Daredevil, Hawkeye</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Zachary_Gordon.jpg', 'Zachary Gordon')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Zachary_Gordon.jpg" alt="Zachary Gordon">
+                        <div class="photo-label">Zachary Gordon</div>
+                        <div class="photo-role">Greg Heffley · Diary of a Wimpy Kid</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Xolo_Mariduena.jpg', 'Xolo Maridueña')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Xolo_Mariduena.jpg" alt="Xolo Maridueña">
+                        <div class="photo-label">Xolo Maridueña</div>
+                        <div class="photo-role">Miguel Diaz · Cobra Kai · Blue Beetle</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- C2E2 -->
+            <div>
+                <div class="flex items-center gap-4 mb-6">
+                    <h2 class="text-2xl font-bold text-gradient whitespace-nowrap">C2E2</h2>
+                    <div class="flex-1 h-px bg-gradient-to-r from-green-500 to-transparent opacity-30"></div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Brett_Dalton.jpg', 'Brett Dalton')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Brett_Dalton.jpg" alt="Brett Dalton">
+                        <div class="photo-label">Brett Dalton</div>
+                        <div class="photo-role">Grant Ward · Agents of S.H.I.E.L.D.</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Elizabeth_Olsen.jpg', 'Elizabeth Olsen')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Elizabeth_Olsen.jpg" alt="Elizabeth Olsen">
+                        <div class="photo-label">Elizabeth Olsen</div>
+                        <div class="photo-role">Scarlet Witch · WandaVision, Avengers</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Ioan_Gruffudd.jpg', 'Ioan Gruffudd')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Ioan_Gruffudd.jpg" alt="Ioan Gruffudd">
+                        <div class="photo-label">Ioan Gruffudd</div>
+                        <div class="photo-role">Mr. Fantastic · Fantastic Four</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Tom_Kenny.jpg', 'Tom Kenny')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Tom_Kenny.jpg" alt="Tom Kenny">
+                        <div class="photo-label">Tom Kenny</div>
+                        <div class="photo-role">SpongeBob SquarePants (voice)</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Tyler_Hoechlin.jpg', 'Tyler Hoechlin')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Tyler_Hoechlin.jpg" alt="Tyler Hoechlin">
+                        <div class="photo-label">Tyler Hoechlin</div>
+                        <div class="photo-role">Superman · Superman & Lois, Teen Wolf</div>
+                    </div>
+
+                    <div class="photo-card" onclick="openLightbox('./Comic Con Photos/web/Wilson_Bethel.jpg', 'Wilson Bethel')">
+                        <img loading="lazy" src="./Comic Con Photos/web/Wilson_Bethel.jpg" alt="Wilson Bethel">
+                        <div class="photo-label">Wilson Bethel</div>
+                        <div class="photo-role">Bullseye · Daredevil</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+        <img id="lightbox-img" src="" alt="">
+        <span class="lightbox-label" id="lightbox-label"></span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2026 Aarul Dhawan. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/aarul-dhawan/" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://github.com/aaruldhawan02" class="text-gray-400 hover:text-white transition-colors">GitHub</a>
+                    <a href="mailto:aaruldhawan@outlook.com" class="text-gray-400 hover:text-white transition-colors">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        function downloadResume() {
+            const link = document.createElement('a');
+            link.href = './resources/Aarul_Dhawan Resume.pdf';
+            link.download = 'Aarul_Dhawan_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function openLightbox(src, label) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-label').textContent = label;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox(e) {
+            if (!e || e.target !== document.getElementById('lightbox-img')) {
+                document.getElementById('lightbox').classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
