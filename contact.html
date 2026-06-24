@@ -352,7 +352,7 @@
                                     <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    <span class="text-gray-300">Urbana-Champaign, Illinois</span>
+                                    <span class="text-gray-300">Seattle, Washington</span>
                                 </div>
                                 <div class="flex items-center">
                                     <svg class="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -540,12 +540,7 @@
 
         // Download resume
         function downloadResume() {
-            const link = document.createElement('a');
-            link.href = './resources/Aarul_Dhawan Resume.pdf';
-            link.download = 'Aarul_Dhawan_Resume.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            window.open('./resources/Aarul_Dhawan Resume.pdf', '_blank');
         }
 
         // Reveal animations on scroll

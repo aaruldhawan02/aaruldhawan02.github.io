@@ -507,13 +507,7 @@ function showNotification(message, type = 'info') {
 
 // Resume download functionality
 function downloadResume() {
-    const link = document.createElement('a');
-    link.href = './resources/Aarul_Dhawan Resume.pdf';
-    link.download = 'Aarul_Dhawan_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    showNotification('Resume downloaded successfully!', 'success');
+    window.open('./resources/Aarul_Dhawan Resume.pdf', '_blank');
 }
 
 // Contact form handling (for pages that have it)
