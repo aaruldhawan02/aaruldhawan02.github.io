@@ -12,8 +12,8 @@
             --primary-dark: #0a0a0a;
             --bg-dark: #050505;
             --text-light: #f8f8f6;
-            --accent-green: #00ff41;
-            --accent-green-dim: #00b341;
+            --accent-blue: #00b4ff;
+            --accent-blue-dim: #0077cc;
             --neutral-gray: #6b7280;
         }
         
@@ -38,8 +38,8 @@
             height: 100vh;
             background-color: #050505;
             background-image:
-                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+                linear-gradient(rgba(0, 180, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 180, 255, 0.04) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -2;
         }
@@ -56,25 +56,25 @@
         .glass-card {
             background: rgba(5, 10, 5, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 180, 255, 0.1);
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-dim) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #00b341 100%);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0077cc 100%);
             color: var(--bg-dark);
             transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 180, 255, 0.3);
         }
         
         .filter-btn {
@@ -88,14 +88,14 @@
         }
         
         .filter-btn:hover {
-            border-color: var(--accent-green);
-            color: var(--accent-green);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
         }
         
         .filter-btn.active {
-            background: var(--accent-green);
+            background: var(--accent-blue);
             color: var(--bg-dark);
-            border-color: var(--accent-green);
+            border-color: var(--accent-blue);
         }
         
         .project-card {
@@ -120,8 +120,8 @@
             display: inline-block;
             padding: 0.25rem 0.75rem;
             margin: 0.25rem 0.25rem 0.25rem 0;
-            background: rgba(0, 255, 65, 0.1);
-            color: var(--accent-green);
+            background: rgba(0, 180, 255, 0.1);
+            color: var(--accent-blue);
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
@@ -129,7 +129,7 @@
         
         .search-input {
             background: rgba(5, 10, 5, 0.85);
-            border: 2px solid rgba(0, 255, 65, 0.2);
+            border: 2px solid rgba(0, 180, 255, 0.2);
             color: var(--text-light);
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
@@ -139,8 +139,8 @@
         
         .search-input:focus {
             outline: none;
-            border-color: var(--accent-green);
-            box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.1);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.1);
         }
         
         .modal {
@@ -163,7 +163,7 @@
         
         .modal-content {
             background: rgba(5, 10, 5, 0.95);
-            border: 1px solid rgba(0, 255, 65, 0.2);
+            border: 1px solid rgba(0, 180, 255, 0.2);
             border-radius: 1rem;
             padding: 2rem;
             max-width: 800px;
@@ -185,7 +185,7 @@
         }
         
         .close-modal:hover {
-            color: var(--accent-green);
+            color: var(--accent-blue);
         }
         
         .reveal {
@@ -271,6 +271,7 @@
                 <button class="filter-btn" data-filter="web">Web Development</button>
                 <button class="filter-btn" data-filter="aws">AWS</button>
                 <button class="filter-btn" data-filter="hackathon">Hackathon</button>
+                <button class="filter-btn" data-filter="gamedev">Game Dev</button>
             </div>
         </div>
     </section>
@@ -296,8 +297,9 @@
                             <span class="tech-tag">RDMA/RoCE</span>
                             <span class="tech-tag">Erasure Coding</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/aaruldhawan02/RDMA-Distributed-KV-Store" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/aaruldhawan02/RDMA-Distributed-KV-Store" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">GitHub</a>
+                            <a href="./resources/SHARD.pdf" target="_blank" class="px-3 py-1.5 rounded-lg border border-blue-500 border-opacity-50 text-blue-400 hover:bg-blue-500 hover:bg-opacity-20 text-xs font-medium transition-all">Technical Report</a>
                         </div>
                     </div>
                 </div>
@@ -318,8 +320,9 @@
                             <span class="tech-tag">vLLM</span>
                             <span class="tech-tag">PyTorch</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/ktrikha2/sackv" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/ktrikha2/sackv" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">GitHub</a>
+                            <a href="./resources/SACKV.pdf" target="_blank" class="px-3 py-1.5 rounded-lg border border-blue-500 border-opacity-50 text-blue-400 hover:bg-blue-500 hover:bg-opacity-20 text-xs font-medium transition-all">Technical Report</a>
                         </div>
                     </div>
                 </div>
@@ -332,7 +335,7 @@
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">CS537 (Multimedia Systems)</h3>
-                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded text-xs font-medium">Research</span>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded text-xs font-medium">Research</span>
                         </div>
                         <p class="text-gray-400 mb-4">Compared five feature-level transmission strategies for server-side keyword spotting using PyTorch CNNs and Silero VAD — from raw PCM to learned CNN embeddings.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -340,8 +343,9 @@
                             <span class="tech-tag">PyTorch</span>
                             <span class="tech-tag">Silero VAD</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/abhishekramakri/CS-537-Research" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/abhishekramakri/CS-537-Research" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">GitHub</a>
+                            <a href="./resources/CS537.pdf" target="_blank" class="px-3 py-1.5 rounded-lg border border-blue-500 border-opacity-50 text-blue-400 hover:bg-blue-500 hover:bg-opacity-20 text-xs font-medium transition-all">Technical Report</a>
                         </div>
                     </div>
                 </div>
@@ -354,7 +358,7 @@
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">PayOff</h3>
-                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded text-xs font-medium">Hack@Brown 2026</span>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded text-xs font-medium">Hack@Brown 2026</span>
                         </div>
                         <p class="text-gray-400 mb-4">Peer-to-peer offline payment system using Apple Bonjour — no WiFi or cellular required. ECDH handshake via Apple CryptoKit.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -363,8 +367,8 @@
                             <span class="tech-tag">CryptoKit</span>
                             <span class="tech-tag">Bonjour</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/PillaiFanClub/Ladidadidaaaa" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/PillaiFanClub/Ladidadidaaaa" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -377,7 +381,7 @@
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">Arcade Karaoke</h3>
-                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded text-xs font-medium">AWS Award Winner</span>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded text-xs font-medium">AWS Award Winner</span>
                         </div>
                         <p class="text-gray-400 mb-4">Multiplayer karaoke game with real-time scoring based on pitch analysis using Librosa. Built at Brown Hackathon 2025.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -386,9 +390,8 @@
                             <span class="tech-tag">WebSockets</span>
                             <span class="tech-tag">Librosa</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
-                            <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Demo</a>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/PillaiFanClub/Arcadaraoke" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -401,7 +404,7 @@
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">LeMAC</h3>
-                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-500 rounded text-xs font-medium">Educational</span>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-500 rounded text-xs font-medium">Educational</span>
                         </div>
                         <p class="text-gray-400 mb-4">Learning Management Assignment Collector that aggregates assignments from Canvas and PrairieLearn into a unified view.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -410,9 +413,31 @@
                             <span class="tech-tag">Selenium</span>
                             <span class="tech-tag">API Integration</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
-                            <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Live Site</a>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/aaruldhawan02/Custom-Calendar-LeMac" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boom Buddies -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden" data-tags="systems gamedev" data-project="boom-buddies">
+                    <div class="w-full h-48 flex items-center justify-center" style="background: linear-gradient(135deg, #1a0a00 0%, #2a1500 100%);">
+                        <span class="text-4xl font-bold text-gradient">Boom Buddies</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gradient">Boom Buddies</h3>
+                            <span class="px-2 py-1 bg-orange-500 bg-opacity-20 text-orange-400 rounded text-xs font-medium">UE5 Game</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">First-person 3D reimagining of Minesweeper in Unreal Engine 5.6. Players physically shoot tiles on a procedurally generated 3D board, with full local multiplayer and DualSense controller support.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Unreal Engine 5</span>
+                            <span class="tech-tag">Blueprints</span>
+                            <span class="tech-tag">UMG</span>
+                            <span class="tech-tag">DualSense SDK</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/aaruldhawan02/boom-buddies" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -434,10 +459,6 @@
                             <span class="tech-tag">React</span>
                             <span class="tech-tag">LLM</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">Case Study</a>
-                            <a href="#" class="text-sage-500 hover:text-sage-400 text-sm font-medium">Details</a>
-                        </div>
                     </div>
                 </div>
 
@@ -457,9 +478,6 @@
                             <span class="tech-tag">Java</span>
                             <span class="tech-tag">AWS EKS</span>
                             <span class="tech-tag">CloudWatch</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">Technical Details</a>
                         </div>
                     </div>
                 </div>
@@ -481,9 +499,6 @@
                             <span class="tech-tag">SQL</span>
                             <span class="tech-tag">Data Visualization</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
-                        </div>
                     </div>
                 </div>
 
@@ -495,7 +510,7 @@
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-xl font-bold text-gradient">Audio Enhancement Pipeline</h3>
-                            <span class="px-2 py-1 bg-green-500 bg-opacity-20 text-green-500 rounded text-xs font-medium">AMD Client</span>
+                            <span class="px-2 py-1 bg-blue-500 bg-opacity-20 text-blue-500 rounded text-xs font-medium">AMD Client</span>
                         </div>
                         <p class="text-gray-400 mb-4">ML pipeline for audio enhancement using dynamic mixing and noise augmentation, increasing model robustness by 2.1x.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -503,9 +518,6 @@
                             <span class="tech-tag">AWS SageMaker</span>
                             <span class="tech-tag">ML/AI</span>
                             <span class="tech-tag">Audio Processing</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">Technical Report</a>
                         </div>
                     </div>
                 </div>
@@ -527,9 +539,6 @@
                             <span class="tech-tag">Pinecone</span>
                             <span class="tech-tag">GCP</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="#" class="text-green-400 hover:text-green-300 text-sm font-medium">GitHub</a>
-                        </div>
                     </div>
                 </div>
 
@@ -550,8 +559,8 @@
                             <span class="tech-tag">iOS</span>
                             <span class="tech-tag">TMDB API</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="https://apps.apple.com/us/app/onmo/id6756551233" target="_blank" class="text-green-400 hover:text-green-300 text-sm font-medium">App Store</a>
+                        <div class="flex gap-2">
+                            <a href="https://apps.apple.com/us/app/onmo/id6756551233" target="_blank" class="px-3 py-1.5 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400 text-xs font-medium transition-all">App Store</a>
                         </div>
                     </div>
                 </div>
@@ -742,6 +751,21 @@
                     challenges: 'Handling different API structures and authentication methods across various LMS platforms.',
                     outcome: 'Successfully unified assignment management for students using multiple learning platforms.'
                 },
+                'boom-buddies': {
+                    title: 'Boom Buddies — UE5 First-Person Minesweeper',
+                    description: 'A first-person 3D reimagining of Minesweeper built in Unreal Engine 5.6. Instead of clicking a grid, players physically shoot tiles on a 3D board to reveal numbers or detonate bombs — bridging classic minesweeper logic with FPS gameplay.',
+                    features: [
+                        'Procedural grid generation — minesweeper board spawned at runtime with randomized bomb placement, supporting 10×10, 15×15, and 20×20 difficulty tiers',
+                        'FPS shooting mechanic — players interact with the board using a physical gun, triggering number reveals and detonations through projectile collision',
+                        'Flag system — players can mark suspected bomb tiles, preserving the core minesweeper strategy in 3D space',
+                        'Full UI/UX pipeline — main menu, HUD (health, crosshair, bomb indicator), level select, tutorial overlay, win/game-over screens built with UMG',
+                        'Native DualSense controller support with tuned analog deadzone and sensitivity via UE5 plugin integration',
+                        'UE5 Enhanced Input System for rebindable, context-sensitive controls across keyboard and controller'
+                    ],
+                    technologies: ['Unreal Engine 5.6', 'Blueprint Visual Scripting', 'UMG', 'Enhanced Input System', 'DualSense SDK'],
+                    challenges: 'Implementing flood-fill reveal logic and procedural bomb placement entirely in Blueprint visual scripting, and integrating native DualSense input without C++ plugins.',
+                    outcome: 'Fully playable local multiplayer FPS minesweeper with three difficulty tiers, complete UI pipeline, and controller support — built entirely in UE5 Blueprints.'
+                },
                 'epic-ai': {
                     title: 'Epic AI Assistant - Healthcare Innovation',
                     description: 'Cross-platform AI assistant for comparing echocardiogram studies, designed to improve diagnostic efficiency in clinical settings.',
@@ -836,26 +860,26 @@
                     <p class="text-gray-300 mb-6">${project.description}</p>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-green-400 mb-3">Key Features</h3>
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Key Features</h3>
                         <ul class="space-y-2">
-                            ${project.features.map(feature => `<li class="flex items-start"><span class="text-green-400 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
+                            ${project.features.map(feature => `<li class="flex items-start"><span class="text-blue-400 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
                         </ul>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-green-400 mb-3">Technologies Used</h3>
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Technologies Used</h3>
                         <div class="flex flex-wrap gap-2">
                             ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
                         </div>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-green-400 mb-3">Technical Challenges</h3>
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Technical Challenges</h3>
                         <p class="text-gray-300">${project.challenges}</p>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-green-400 mb-3">Outcome & Impact</h3>
+                        <h3 class="text-xl font-semibold text-blue-400 mb-3">Outcome & Impact</h3>
                         <p class="text-gray-300">${project.outcome}</p>
                     </div>
                 `;

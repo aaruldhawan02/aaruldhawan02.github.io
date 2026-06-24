@@ -11,8 +11,8 @@
             --primary-dark: #0a0a0a;
             --bg-dark: #050505;
             --text-light: #f8f8f6;
-            --accent-green: #00ff41;
-            --accent-green-dim: #00b341;
+            --accent-blue: #00b4ff;
+            --accent-blue-dim: #0077cc;
             --neutral-gray: #6b7280;
         }
 
@@ -31,8 +31,8 @@
             width: 100%; height: 100vh;
             background-color: #050505;
             background-image:
-                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+                linear-gradient(rgba(0, 180, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 180, 255, 0.04) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -2;
         }
@@ -43,37 +43,37 @@
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-dim) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #00b341 100%);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0077cc 100%);
             color: var(--bg-dark);
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 180, 255, 0.3);
         }
 
         .photo-card {
             position: relative;
             overflow: hidden;
             border-radius: 12px;
-            border: 1px solid rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 180, 255, 0.1);
             background: rgba(5, 10, 5, 0.85);
             cursor: pointer;
             transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .photo-card:hover {
-            border-color: rgba(0, 255, 65, 0.4);
+            border-color: rgba(0, 180, 255, 0.4);
             transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.12);
+            box-shadow: 0 8px 30px rgba(0, 180, 255, 0.12);
         }
 
         .photo-card img {
@@ -92,7 +92,7 @@
         .photo-label {
             padding: 10px 14px 4px;
             font-size: 0.8rem;
-            color: var(--accent-green);
+            color: var(--accent-blue);
             font-family: 'JetBrains Mono', monospace;
         }
 
@@ -121,14 +121,14 @@
             max-height: 88vh;
             object-fit: contain;
             border-radius: 8px;
-            border: 1px solid rgba(0, 255, 65, 0.2);
+            border: 1px solid rgba(0, 180, 255, 0.2);
         }
 
         .lightbox-close {
             position: absolute;
             top: 20px; right: 24px;
             font-size: 2rem;
-            color: var(--accent-green);
+            color: var(--accent-blue);
             cursor: pointer;
             font-family: 'JetBrains Mono', monospace;
             line-height: 1;
@@ -139,7 +139,7 @@
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--accent-green);
+            color: var(--accent-blue);
             font-size: 0.85rem;
             font-family: 'JetBrains Mono', monospace;
             white-space: nowrap;
@@ -209,7 +209,7 @@
             <div class="mb-14">
                 <div class="flex items-center gap-4 mb-6">
                     <h2 class="text-2xl font-bold text-gradient whitespace-nowrap">Washington Summer Con</h2>
-                    <div class="flex-1 h-px bg-gradient-to-r from-green-500 to-transparent opacity-30"></div>
+                    <div class="flex-1 h-px bg-gradient-to-r from-blue-500 to-transparent opacity-30"></div>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
@@ -250,7 +250,7 @@
             <div>
                 <div class="flex items-center gap-4 mb-6">
                     <h2 class="text-2xl font-bold text-gradient whitespace-nowrap">C2E2</h2>
-                    <div class="flex-1 h-px bg-gradient-to-r from-green-500 to-transparent opacity-30"></div>
+                    <div class="flex-1 h-px bg-gradient-to-r from-blue-500 to-transparent opacity-30"></div>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 

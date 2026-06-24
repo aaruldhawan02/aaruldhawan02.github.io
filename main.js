@@ -72,26 +72,26 @@ function openProjectModal(projectId) {
             <p class="text-gray-300 mb-6">${project.description}</p>
             
             <div class="mb-6">
-                <h3 class="text-xl font-semibold text-amber-500 mb-3">Key Features</h3>
+                <h3 class="text-xl font-semibold text-blue-400 mb-3">Key Features</h3>
                 <ul class="space-y-2">
-                    ${project.features.map(feature => `<li class="flex items-start"><span class="text-amber-500 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
+                    ${project.features.map(feature => `<li class="flex items-start"><span class="text-blue-400 mr-2">▸</span><span class="text-gray-300">${feature}</span></li>`).join('')}
                 </ul>
             </div>
             
             <div class="mb-6">
-                <h3 class="text-xl font-semibold text-amber-500 mb-3">Technologies Used</h3>
+                <h3 class="text-xl font-semibold text-blue-400 mb-3">Technologies Used</h3>
                 <div class="flex flex-wrap gap-2">
-                    ${project.technologies.map(tech => `<span class="px-3 py-1 bg-amber-500 bg-opacity-20 text-amber-500 rounded-full text-sm">${tech}</span>`).join('')}
+                    ${project.technologies.map(tech => `<span class="px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-sm">${tech}</span>`).join('')}
                 </div>
             </div>
             
             <div class="mb-6">
-                <h3 class="text-xl font-semibold text-amber-500 mb-3">Challenges</h3>
+                <h3 class="text-xl font-semibold text-blue-400 mb-3">Challenges</h3>
                 <p class="text-gray-300">${project.challenges}</p>
             </div>
             
             <div>
-                <h3 class="text-xl font-semibold text-amber-500 mb-3">Outcome</h3>
+                <h3 class="text-xl font-semibold text-blue-400 mb-3">Outcome</h3>
                 <p class="text-gray-300">${project.outcome}</p>
             </div>
         `;
@@ -464,7 +464,7 @@ function showNotification(message, type = 'info') {
     // Set background color based on type
     switch (type) {
         case 'success':
-            notification.classList.add('bg-green-500', 'text-white');
+            notification.classList.add('bg-blue-500', 'text-white');
             break;
         case 'error':
             notification.classList.add('bg-red-500', 'text-white');

@@ -12,8 +12,8 @@
             --primary-dark: #0a0a0a;
             --bg-dark: #050505;
             --text-light: #f8f8f6;
-            --accent-green: #00ff41;
-            --accent-green-dim: #00b341;
+            --accent-blue: #00b4ff;
+            --accent-blue-dim: #0077cc;
             --neutral-gray: #6b7280;
         }
         
@@ -38,8 +38,8 @@
             height: 100vh;
             background-color: #050505;
             background-image:
-                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+                linear-gradient(rgba(0, 180, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 180, 255, 0.04) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -2;
         }
@@ -56,25 +56,25 @@
         .glass-card {
             background: rgba(5, 10, 5, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 180, 255, 0.1);
         }
         
         .text-gradient {
-            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-dim) 100%);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-dim) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #00b341 100%);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0077cc 100%);
             color: var(--bg-dark);
             transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 255, 65, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 180, 255, 0.3);
         }
 
         /* Horizontal Timeline */
@@ -92,7 +92,7 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent-green-dim), var(--accent-green), var(--accent-green-dim));
+            background: linear-gradient(90deg, var(--accent-blue-dim), var(--accent-blue), var(--accent-blue-dim));
             transform: translateY(-50%);
             z-index: 0;
         }
@@ -141,14 +141,14 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: var(--accent-green);
+            background: var(--accent-blue);
             border: 3px solid var(--bg-dark);
-            box-shadow: 0 0 12px rgba(0, 255, 65, 0.6);
+            box-shadow: 0 0 12px rgba(0, 180, 255, 0.6);
         }
 
         .timeline-date {
             font-size: 0.75rem;
-            color: var(--accent-green-dim);
+            color: var(--accent-blue-dim);
             font-family: 'JetBrains Mono', monospace;
             white-space: nowrap;
         }
@@ -156,7 +156,7 @@
         .timeline-card {
             background: rgba(5, 10, 5, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 180, 255, 0.1);
             border-radius: 16px;
             padding: 20px;
             width: 100%;
@@ -164,16 +164,16 @@
         }
 
         .timeline-card:hover {
-            border-color: rgba(0, 255, 65, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+            border-color: rgba(0, 180, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 180, 255, 0.1);
         }
 
         .incoming-badge {
             display: inline-block;
             margin-top: 8px;
             padding: 2px 10px;
-            background: rgba(0, 255, 65, 0.1);
-            color: #00ff41;
+            background: rgba(0, 180, 255, 0.1);
+            color: #00b4ff;
             border-radius: 999px;
             font-size: 0.7rem;
         }
@@ -195,7 +195,7 @@
                 width: 2px;
                 height: auto;
                 transform: none;
-                background: linear-gradient(180deg, var(--accent-green-dim), var(--accent-green), var(--accent-green-dim));
+                background: linear-gradient(180deg, var(--accent-blue-dim), var(--accent-blue), var(--accent-blue-dim));
             }
 
             .timeline-node {
@@ -239,7 +239,7 @@
             .timeline-card .mobile-date {
                 display: block;
                 font-size: 0.7rem;
-                color: var(--accent-green-dim);
+                color: var(--accent-blue-dim);
                 margin-top: 4px;
             }
         }
@@ -392,7 +392,7 @@
                 <p class="text-gray-400 mb-6">Comprehensive academic foundation in computer science and related fields</p>
                 <div class="flex items-center justify-center gap-6 flex-wrap">
                     <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded bg-green-500 bg-opacity-30 border border-green-500 border-opacity-40"></div>
+                        <div class="w-4 h-4 rounded bg-cyan-500 bg-opacity-30 border border-cyan-500 border-opacity-40"></div>
                         <span class="text-sm text-gray-400">Graduate CS</span>
                     </div>
                     <div class="flex items-center gap-2">
@@ -412,8 +412,8 @@
                     <h3 class="text-2xl font-bold mb-6 text-gradient">Graduate Level</h3>
                     <div class="grid gap-4">
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS412" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-green-400 font-bold">412</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-cyan-400 font-bold">412</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Introduction to Data Mining</h4>
@@ -422,8 +422,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS415" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-green-400 font-bold">415</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-cyan-400 font-bold">415</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Game Development</h4>
@@ -432,8 +432,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS425" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-green-400 font-bold">425</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-cyan-400 font-bold">425</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Distributed Systems</h4>
@@ -442,8 +442,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS438" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-green-400 font-bold">438</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-cyan-400 font-bold">438</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Communication Networks</h4>
@@ -452,8 +452,8 @@
                         </a>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS441" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-green-400 font-bold">441</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-cyan-400 font-bold">441</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Applied Machine Learning</h4>
@@ -462,8 +462,8 @@
                         </a>
                         
                         <div class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4">
-                                <span class="text-green-400 font-bold">498</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4">
+                                <span class="text-cyan-400 font-bold">498</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Cloud Computing Applications</h4>
@@ -472,8 +472,8 @@
                         </div>
                         
                         <a href="https://siebelschool.illinois.edu/academics/courses/CS537" class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30 hover:bg-opacity-50 transition-all group">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
-                                <span class="text-green-400 font-bold">537</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4 group-hover:bg-opacity-30 transition-all">
+                                <span class="text-cyan-400 font-bold">537</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Multimedia Systems</h4>
@@ -482,8 +482,8 @@
                         </a>
                         
                         <div class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4">
-                                <span class="text-green-400 font-bold">598</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4">
+                                <span class="text-cyan-400 font-bold">598</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Storage Systems</h4>
@@ -492,8 +492,8 @@
                         </div>
                         
                         <div class="flex items-center p-4 rounded-lg bg-gray-800 bg-opacity-30">
-                            <div class="w-12 h-12 rounded-lg bg-green-500 bg-opacity-20 flex items-center justify-center mr-4">
-                                <span class="text-green-400 font-bold">598</span>
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 bg-opacity-20 flex items-center justify-center mr-4">
+                                <span class="text-cyan-400 font-bold">598</span>
                             </div>
                             <div>
                                 <h4 class="text-white font-medium">Systems For GenAI</h4>
